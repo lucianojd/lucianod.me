@@ -1,0 +1,59 @@
+CSC 225
+Algorithms and Data Structures I
+https://web.uvic.ca/calendar2019-09/CDs/CSC/225.html
+
+ECE 260
+Continuous-Time Signals and Systems
+https://web.uvic.ca/calendar2019-09/CDs/ECE/260.html
+
+ENGR 121
+Design II
+https://web.uvic.ca/calendar2019-09/CDs/ENGR/121.html
+
+ENGR 112
+Design I
+https://web.uvic.ca/calendar2019-09/CDs/ENGR/112.html
+
+ECE 310
+Digital Signal Processing I
+https://web.uvic.ca/calendar2019-09/CDs/ECE/310.html
+
+CSC 115
+Fundamentals of Programming II
+https://web.uvic.ca/calendar2019-09/CDs/CSC/115.html
+
+SENG 310
+Human Computer Interaction
+https://web.uvic.ca/calendar2019-09/CDs/SENG/310.html
+
+ECE 255
+Introduction to Computer Architecture
+https://web.uvic.ca/calendar2019-09/CDs/ECE/255.html
+
+ECON 180
+Introduction to Principles of Microeconomics and Final Project Evaluation
+https://web.uvic.ca/calendar2019-09/CDs/ECON/180.html
+
+STAT 260
+Introduction to Probability and Statistics I
+https://web.uvic.ca/calendar2019-09/CDs/STAT/260.html
+
+ENGR 130
+Introduction to Professional Practice
+https://web.uvic.ca/calendar2019-09/CDs/ENGR/130.html
+
+MATH 122
+Logic and Foundations
+https://web.uvic.ca/calendar2019-09/CDs/MATH/122.html
+
+SENG 265
+Software Development Methods
+https://web.uvic.ca/calendar2019-09/CDs/SENG/265.html
+
+SENG 275
+Software Testing
+https://web.uvic.ca/calendar2019-09/CDs/SENG/275.html
+
+HSTR 115
+The Second World War
+https://web.uvic.ca/calendar2019-09/CDs/HSTR/115.html

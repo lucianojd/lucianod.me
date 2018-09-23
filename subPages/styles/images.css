@@ -1,0 +1,14 @@
+/* 
+File Name: projects.css
+Author: Luciano De Gianni      
+Date Modified: Jan.19th, 2018 
+Description: Contains styles for images.
+*/
+
+
+img {
+	border-style: solid;
+	border-color: black;
+	width: 50vw;
+	height: 50hw;
+}

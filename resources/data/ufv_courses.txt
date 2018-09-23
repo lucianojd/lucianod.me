@@ -1,0 +1,43 @@
+MATH 111
+Calculus One
+https://www.ufv.ca/calendar/current/CourseDescriptions/MATH.htm
+
+MATH 112
+Calculus Two
+https://www.ufv.ca/calendar/current/CourseDescriptions/MATH.htm
+
+PHYS 112
+Electricity and Magnetism
+https://www.ufv.ca/calendar/current/CourseDescriptions/PHYS.htm
+
+ENGR 113
+Engineering Physics - Statics & Dynamics
+https://www.ufv.ca/calendar/CourseOutlines/PDFs/ENGR/
+
+ENGR 122
+Introduction to Engineering
+https://www.ufv.ca/calendar/CourseOutlines/PDFs/ENGR/
+
+COMP 152
+Introduction to Structured Programming
+https://www.ufv.ca/calendar/current/CourseDescriptions/COMP.htm
+
+MATH 152
+Linear Algebra for Engineering
+https://www.ufv.ca/calendar/current/CourseDescriptions/MATH.htm
+
+PHYS 111
+Mechanics
+https://www.ufv.ca/calendar/current/CourseDescriptions/PHYS.htm
+
+CHEM 114
+Principles of Chemistry II
+https://www.ufv.ca/calendar/current/CourseDescriptions/CHEM.htm
+
+CHEM 113
+Principles of Chemistry I
+https://www.ufv.ca/calendar/current/CourseDescriptions/CHEM.htm
+
+CMNS 251
+Professional Report Writing
+https://www.ufv.ca/calendar/current/CourseDescriptions/CMNS.htm

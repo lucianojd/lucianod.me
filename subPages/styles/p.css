@@ -1,0 +1,11 @@
+/* 
+File Name: p.css
+Author: Luciano De Gianni      
+Date Modified: Jan.19th, 2018 
+Description: p.css contains styles for the paragraph tags
+*/
+
+p {
+	text-align-last: left;
+	color: black;
+}

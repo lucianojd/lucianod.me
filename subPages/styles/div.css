@@ -1,0 +1,47 @@
+/* 
+File Name: div.css
+Author: Luciano De Gianni      
+Date Modified: Jan.14th, 2018 
+Description: div.css contains the styles for the div tag.
+*/
+
+/*General*/
+div.body {
+	margin: 40px;
+}
+
+div.border {
+	margin: 30px;
+	padding: 10px;
+	border-style: solid;
+	border-color: black;
+	border-radius: 20px;
+}
+
+/*Styles for index.html*/
+div.index_main {
+	display: flex;
+	height: 100vh;
+}
+
+div.index_sidebar {
+	background-image: url("images/black.jpg");
+	width: 15%;
+}
+
+/*Styles for home.html*/
+div.home_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50vw;
+	margin: auto;
+	margin-bottom: 100px;
+}
+
+div.home_box{
+	flex: 0 0 100%;
+	margin: auto;
+	border-style: solid;
+	text-align: center;
+}

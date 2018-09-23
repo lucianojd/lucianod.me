@@ -1,0 +1,207 @@
+/*Container styling.*/
+#menu-container {
+    background-image: url("/resources/images/black.jpg");
+    display: flex;
+    height: 100vh;
+    width: 10%;
+    min-width: 180px;
+}
+
+#page-container {
+    background-image: url("/resources/images/white.jpg");
+    height: 100vh;
+    width: 90%;
+    overflow-y: auto;
+}
+
+/*Link styling.*/
+a:visited {
+    color: purple;
+}
+
+a:link {
+    color: blue;
+}
+
+a:hover {
+    color: red;
+}
+
+a:active {
+    color: yellow;
+}
+
+/*Body styling.*/
+body {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin: 0px;
+    padding: 0px;
+}
+
+/*Button styling.*/
+button {
+    background: solid;
+    background-color: rgb(4, 138, 143);
+    border-radius: 5px;
+    border-style: none;
+    color: black;
+    font-family: Arial;
+    font-size: 30px;
+    margin: auto;
+    outline-style: none;
+    padding: 10px;
+    text-align: center;
+    transition: box-shadow 0.25s, background-color 1s;
+    width: 100%;
+}
+
+button:hover {
+    background-color: rgb(0, 194, 201);
+    box-shadow: 3px 3px 3px black;
+    cursor: pointer;
+}
+
+
+label {
+    font-weight: bold;
+}
+
+select {
+    font-size: 16px;
+}
+
+option {
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+img.loading {
+    display: flex;
+    margin: auto;
+}
+
+section.window {
+    display: flex;
+    flex-direction: row;
+    height: 90%;
+    margin: auto;
+}
+
+section.info {
+    margin: 3vh;
+    width: 30%;
+}
+
+table.table-default {
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 5px;
+    border-spacing: 0px;
+    width: 100%;
+}
+
+table.table-default th {
+    border-bottom: 2px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    background-color: rgb(4, 138, 143);
+    font-size: 20px;
+    padding: 5px;
+}
+
+table.table-default tr:hover {
+    background-color: lightgrey;
+}
+
+table.table-default td {
+    font-size: 18px;
+    padding: 5px;
+}
+
+/*menu*/
+.menu table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.menu td {
+    margin: auto;
+}
+
+.menu tr {
+    margin: 5px;
+}
+
+
+/*home page*/
+#profile_img {
+    border-color: black;
+    border-style: solid;
+    border-radius: 15px;
+    height: 80vh;
+    margin: 50px;
+}
+
+#contact {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: 50%;
+}
+
+#about_me {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+p {
+    width: 70%;
+}
+
+/*education page*/
+section.education_table {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 2%;
+    width: 70%;
+}
+
+/*experience page*/
+section.experience {
+    width: 50%;
+}
+
+#experience_list {
+    background-color: white;
+    border-radius: 5px;
+    border: 2px solid black;
+    height: 80%;
+    overflow-y: scroll;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+/*interests page*/
+section.interests {
+    margin: 2%;
+}
+
+/*projects page*/
+section.projects {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 3vh;
+    width: 70%;
+}

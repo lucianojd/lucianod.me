@@ -1,0 +1,24 @@
+Architecture of Computers
+ECE 255 introduced me to the various components present in a computer. 
+Memory, input and output devices, instruction cycles, assembly language, buses, and processors were covered in the course. 
+I'm familiar with various memory types such as ROM, RAM ,Hard Disk Drives, cache and processor registers. 
+We covered the basics about memory structure and functionality. We covered interrupts and polling with input and output devices. 
+The instruction cycle covered in the course was: fetch, decode, execute, store, and increment the program counter. 
+I know how to build subroutines. We were introduced to the system bus; the system bus allows communication between components. 
+Register usage and the binary versions of instructions were covered. Word length and the advantages and disadvantages of having longer words was taught as well.
+
+Mathematics
+I've completed one 100 level course for linear algebra and two 100 level courses for calculus. 
+I have completed a 200 level course for time signals and systems. 
+Solving matrices, matrix arithmetic, eigenvalues and eigenvectors, transformation matrices, complex numbers, and working with spaces of various dimension described by real or complex valued unit vectors are all concepts I've learned from linear algebra. 
+Tools I've learned in calculus are derivation, integration and various techniques for performing the operations. 
+In time signals and systems, I gained the tools to convert a signal into a Fourier series and apply the Fourier transform and Laplace transform. 
+The course introduced to the basics of sampling and interpolation, amplitude modulation, and modelling systems using differential equations.
+
+Programming Languages
+I am familiar with Java, C++, C, HTML, and CSS. I am also familiar with ARM Assembly language.
+Specifically, I've programmed the STM32 Cortex™-M0 processor in my Computer Architecture course: ECE 255. 
+The languages I'm most familiar with are Java and C++; both languages were introduced to me in university. 
+I've built multiple abstract data types using Java such as stacks, heaps, and binary search trees. 
+I am confident I could build the same structures in C++. I've programmed a little in C, but I've never taken a class focused on the language. 
+I learned both HTML and CSS in high-school. Aside from this website, I've never built any major projects using HTML and CSS.

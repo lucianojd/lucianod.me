@@ -1,0 +1,100 @@
+/* 
+File Name: table.css
+Author: Luciano De Gianni      
+Date Modified: Jan.19th, 2018 
+Description: Contains all relevant styles to tables including
+table headings, rows, and cells.
+*/
+
+/*General*/
+table.one {
+	background-color: white;
+	border-style: solid;
+	border-color: black;
+	margin: auto;
+	border-collapse: collapse;
+}
+
+th.one {
+	padding: 10px;
+	border-style: solid;
+	border-color: black;
+}
+
+td.one {
+	padding: 5px;
+}
+
+td.one_gray {
+	padding: 5px;
+	background-color: lightgray;
+}
+
+
+/*Styles for index.html*/
+table.index_menu {
+	border-color: white;
+	margin: auto;
+	margin-top: 20vh;
+	vertical-align: center;
+}
+
+td.index_menu {
+	text-align: left;
+	padding-bottom: 0px;
+	padding-top: 10px;
+	transition: 0.25s;
+}
+
+td.index_menu:hover {
+	padding-left: 9px;
+}
+
+
+/*Styles for education.html*/
+td.education_desc {
+	text-align: right;
+	padding: 5px;
+}
+
+td.education_desc_gray {
+	text-align: right;
+	padding: 5px;
+	background-color: lightgray;
+}
+
+/*Styles for skills.html*/
+td.skills {
+	padding: 5px;
+	text-align: center;
+	border-color: black;
+	border-style: solid;
+}
+
+/*Styles for projects.html*/
+table.projects {
+	background-color: white;
+	border-style: solid;
+	border-color: black;
+	margin: auto;
+	border-collapse: collapse;
+}
+
+th.projects {
+	padding: 10px;
+	border-style: solid;
+	border-color: black;
+}
+
+td.projects {
+	padding: 5px;
+	border-style: solid;
+	border-color: black;
+}
+
+td.projects_gray {
+	padding: 5px;
+	background-color: lightgray;
+	border-style: solid;
+	border-color: black;
+}
