@@ -1,9 +1,0 @@
-{
-    "compileOnSave": true,
-    "compilerOptions":{
-        "outDir": "js/",
-    },
-    "files": [
-        "ts/main.ts",
-    ]
-}
