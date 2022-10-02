@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  lucianod.me:
+    container_name: lucianod.me
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./secrets/:/secrets/:ro
