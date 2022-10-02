@@ -9,4 +9,4 @@ COPY . .
 RUN yarn
 RUN yarn next build
 
-CMD "yarn" "next" "build"
+CMD "yarn" "next" "start"
