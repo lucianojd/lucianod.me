@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["apod.nasa.gov"]
+    domains: ["apod.nasa.gov", "www.youtube.com"]
   }
 }
 
