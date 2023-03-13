@@ -1,12 +1,16 @@
-import { memo } from 'react';
-import styles from './styles/Hero.module.scss';
+import React, { memo } from 'react'
+import styles from '@styles/Hero.module.scss'
 
 interface HeroProps {
-    title: string;
+  title: string
 }
 
-function Hero({ title }: HeroProps) {
-    return <div className={styles.container}><h1>{ title }</h1></div>;
+function Hero({ title }: HeroProps): JSX.Element {
+  return (
+    <div className={styles.container}>
+      <h1>{title}</h1>
+    </div>
+  )
 }
 
-export default memo(Hero);
+export default memo(Hero)

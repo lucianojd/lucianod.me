@@ -1,0 +1,17 @@
+@import '../../styles/variables.module.scss';
+
+.container {
+  margin: 50px auto;
+
+  @include mobile {
+    width: 80%;
+  }
+
+  @include tablet {
+    width: 70%;
+  }
+
+  @include desktop {
+    width: 50%;
+  }
+}

@@ -1,3 +1,14 @@
 {
-  "cSpell.words": ["apod", "hdurl", "lucianod"]
+  "cSpell.words": [
+    "apod",
+    "hdurl",
+    "lucianod",
+    "TENZR"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  "editor.formatOnSave": true,
+  "eslint.validate": ["javascript", "typescript"]
 }

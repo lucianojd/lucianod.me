@@ -1,1 +1,1 @@
-export const SITE_NAME = 'lucianod.me';
+export const SITE_NAME = 'lucianod.me'
