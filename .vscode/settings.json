@@ -5,10 +5,9 @@
     "lucianod",
     "TENZR"
   ],
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.organizeImports": true
-  },
-  "editor.formatOnSave": true,
-  "eslint.validate": ["javascript", "typescript"]
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": [
+    "source.formatDocument",
+    "source.fixAll.eslint"
+  ]
 }

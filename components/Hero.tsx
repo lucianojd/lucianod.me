@@ -1,8 +1,8 @@
-import React, { memo } from 'react'
-import styles from '@styles/Hero.module.scss'
+import React, { memo } from 'react';
+import styles from '@styles/Hero.module.scss';
 
 interface HeroProps {
-  title: string
+  title: string;
 }
 
 function Hero({ title }: HeroProps): JSX.Element {
@@ -10,7 +10,7 @@ function Hero({ title }: HeroProps): JSX.Element {
     <div className={styles.container}>
       <h1>{title}</h1>
     </div>
-  )
+  );
 }
 
-export default memo(Hero)
+export default memo(Hero);

@@ -6,12 +6,16 @@ import {
   ParagraphContent,
   parseTXT,
   parseWorkExperienceJSON,
-  WorkExperienceContent
+  WorkExperienceContent,
 } from '@components/helpers';
 import TextBlock from '@components/TextBlock';
 import WorkExperience from '@components/WorkExperience';
 import { promises as fs } from 'fs';
-import { type GetStaticProps, type InferGetStaticPropsType, type NextPage } from 'next';
+import {
+  type GetStaticProps,
+  type InferGetStaticPropsType,
+  type NextPage,
+} from 'next';
 import Head from 'next/head';
 import path from 'path';
 
@@ -30,10 +34,13 @@ export const getStaticProps: GetStaticProps<HomeStaticProps> = async () => {
       const fileContent = await fs.readFile(filePath, 'utf-8');
       const parsedContent = parseTXT(fileContent);
       return parsedContent;
-    }),
+    })
   );
 
-  const workExperienceFilePath = path.join(process.cwd(), 'resources/json/work.json');
+  const workExperienceFilePath = path.join(
+    process.cwd(),
+    'resources/json/work.json'
+  );
   const jsonContent = await fs.readFile(workExperienceFilePath, 'utf-8');
   const workExperience = parseWorkExperienceJSON(jsonContent);
 
@@ -53,8 +60,8 @@ const Home: NextPage<HomeStaticProps> = ({
     <div>
       <Head>
         <title>{SITE_NAME}</title>
-        <meta name='description' content='My portfolio.' />
-        <link rel='icon' href='/favicon.ico' />
+        <meta name="description" content="My portfolio." />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
         <Header />

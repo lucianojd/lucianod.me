@@ -6,9 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --ext .tsx,.ts pages/**/* --ext .tsx,.ts components/**/*",
-    "lint:fix": "eslint --fix --ext .tsx,.ts pages/**/* --ext .tsx,.ts components/**/*",
-    "format": "prettier --write pages/**/* components/**/* --config ./.prettierrc"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "npx prettier components pages resources styles --check",
+    "prettier:fix": "npx prettier components pages resources styles --write"
   },
   "dependencies": {
     "next": "12.3.1",
@@ -19,15 +20,10 @@
     "@types/node": "18.7.23",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.54.1",
-    "@typescript-eslint/parser": "^5.54.1",
-    "eslint": "^8.35.0",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
-    "eslint-import-resolver-typescript": "^3.5.3",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.4",
     "sass": "^1.55.0",
     "typescript": "*"
