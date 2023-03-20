@@ -26,3 +26,17 @@ $desktop-width: 1024px;
     @content;
   }
 }
+
+@mixin auto-width {
+  @include mobile {
+    width: 80%;
+  }
+
+  @include tablet {
+    width: 70%;
+  }
+
+  @include desktop {
+    width: 50%;
+  }
+}

@@ -1,4 +1,4 @@
-import Box from '@components/Box';
+import Box from '@components/core/Box';
 import { memo } from 'react';
 
 interface TextBlockProps {

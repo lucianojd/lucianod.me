@@ -1,6 +1,6 @@
-import Box from '@components/Box';
+import Box from '@components/core/Box';
 import { memo } from 'react';
-import { WorkExperienceContent } from './helpers';
+import { WorkExperienceContent } from '../helpers';
 
 interface WorkExperienceProps {
   content: WorkExperienceContent;

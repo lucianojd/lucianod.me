@@ -30,11 +30,38 @@ p {
   font-size: 1rem;
 }
 
+header {
+  margin: auto;
+  @include auto-width();
+}
+
 footer {
-  position: absolute;
-  width: 100%;
-  background-color: $highlight;
+  margin: 10px auto;
+  padding: 10px;
+  @include auto-width();
+
+  border-radius: 10px;
+
   color: black;
+  background-color: $highlight;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  color: black;
+  font-size: 1.2rem;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+button {
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 table {
