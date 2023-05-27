@@ -49,15 +49,6 @@ footer {
   justify-content: space-between;
 }
 
-a {
-  color: black;
-  font-size: 1.2rem;
-
-  &:hover {
-    color: $primary;
-  }
-}
-
 button {
   &:hover {
     cursor: pointer;
@@ -65,31 +56,30 @@ button {
 }
 
 table {
-  width: 100%;
+  background-color: $secondary;
   color: black;
-  background-color: $primary;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 10px 10px 20px 1px black;
+  border: 1px solid black;
   border-collapse: collapse;
 
   thead {
     background-color: $highlight;
-    th {
-      padding: 10px;
+
+    tr {
+      th {
+        border-bottom: 1px solid black;
+      }
     }
   }
 
   tbody {
-    background-color: $primary;
-    td:first-child {
-      padding: 10px;
-      text-align: center;
-    }
-
     tr {
-      border-bottom: 2px $tertiary solid;
-    }
+      border: 1px solid black;
 
-    tr:last-child {
-      border: none;
+      td {
+      }
     }
   }
 }

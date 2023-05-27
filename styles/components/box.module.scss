@@ -1,7 +1,7 @@
 @import '../../styles/variables.module.scss';
 
 .container {
-  margin: 50px auto;
+  margin: 30px auto;
 
   @include auto-width();
 }

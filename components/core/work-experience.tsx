@@ -1,4 +1,4 @@
-import Box from '@components/core/Box';
+import Box from '@components/common/box';
 import { memo } from 'react';
 import { WorkExperienceContent } from '../helpers';
 

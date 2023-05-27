@@ -1,4 +1,4 @@
-import styles from '@styles/Box.module.scss';
+import styles from '@styles/components/box.module.scss';
 import { ReactNode } from 'react';
 
 interface BoxProps {

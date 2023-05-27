@@ -1,6 +1,5 @@
 import { SITE_NAME } from '@components/constants';
-import Header from './Header';
-import Footer from './Footer';
+import Header from './header';
 
 import { memo } from 'react';
 import Head from 'next/head';
@@ -28,7 +27,6 @@ function PageWrapper({
       </Head>
       <Header />
       <main>{children}</main>
-      <Footer />
     </>
   );
 }

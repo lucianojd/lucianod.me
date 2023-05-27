@@ -1,6 +1,4 @@
-import { SITE_NAME } from '@components/constants';
-import Hero from '@components/core/Hero';
-import Navbar from './Navbar';
+import Navbar from './navbar';
 
 function Header(): JSX.Element {
   const navItems = [
@@ -15,7 +13,6 @@ function Header(): JSX.Element {
   ];
   return (
     <header>
-      <Hero title={SITE_NAME} />
       <Navbar items={navItems} />
     </header>
   );

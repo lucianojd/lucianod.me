@@ -1,5 +1,5 @@
 import { ParagraphContent, parseTXT } from '@components/helpers';
-import TextBlock from '@components/elements/TextBlock';
+import TextBlock from '@components/core/text-block';
 import { promises as fs } from 'fs';
 import {
   type GetStaticProps,
@@ -7,7 +7,7 @@ import {
   type NextPage,
 } from 'next';
 import path from 'path';
-import PageWrapper from '@components/core/PageWrapper';
+import PageWrapper from '@components/common/page-wrapper';
 
 interface HomeStaticProps {
   txtContent: Array<ParagraphContent>;

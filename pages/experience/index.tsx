@@ -5,9 +5,9 @@ import {
   WorkExperienceContent,
 } from '@components/helpers';
 import { promises as fs } from 'fs';
-import Education from '@components/elements/Education';
-import WorkExperience from '@components/elements/WorkExperience';
-import PageWrapper from '@components/core/PageWrapper';
+import Education from '@components/core/education';
+import WorkExperience from '@components/core/work-experience';
+import PageWrapper from '@components/common/page-wrapper';
 
 interface ExperienceStaticProps {
   workExperience: Array<WorkExperienceContent>;
