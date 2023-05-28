@@ -8,6 +8,7 @@ import {
 } from 'next';
 import path from 'path';
 import PageWrapper from '@components/common/page-wrapper';
+import Technologies from '@components/core/technologies';
 
 interface HomeStaticProps {
   txtContent: Array<ParagraphContent>;
@@ -38,6 +39,7 @@ const Home: NextPage<HomeStaticProps> = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <PageWrapper head={{ content: 'This is the home page.' }}>
+      <Technologies />
       {txtContent.map((content, index) => (
         <TextBlock key={index} {...content} />
       ))}

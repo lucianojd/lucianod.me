@@ -1,4 +1,5 @@
 About The Site
 
 Welcome to lucianod.me! My name is Luciano De Gianni. This site serves as both a portfolio for myself and as sandbox for testing web technologies.
+The carousel above is a list of technologies I have used during development throughout my career.
 Please take a look around and let me know what you think!
