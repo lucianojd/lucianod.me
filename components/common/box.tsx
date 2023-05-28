@@ -1,12 +1,9 @@
 import styles from '@styles/components/box.module.scss';
-import { ReactNode } from 'react';
 
-interface BoxProps {
-  children: ReactNode | Array<ReactNode>;
-}
+type BoxProps = JSX.IntrinsicElements['div'];
 
-function Box({ children }: BoxProps) {
-  return <div className={styles.container}>{children}</div>;
+function Box(props: BoxProps) {
+  return <div className={styles.container} {...props} />;
 }
 
 export default Box;

@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps<
 > = async () => {
   const workExperienceFilePath = path.join(
     process.cwd(),
-    'resources/json/work.json'
+    'assets/json/work.json'
   );
   const jsonContent = await fs.readFile(workExperienceFilePath, 'utf-8');
   const workExperience = parseWorkExperienceJSON(jsonContent);

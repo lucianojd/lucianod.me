@@ -14,7 +14,7 @@ interface HomeStaticProps {
 }
 
 export const getStaticProps: GetStaticProps<HomeStaticProps> = async () => {
-  const homeTxtDir = path.join(process.cwd(), 'resources/txt/home');
+  const homeTxtDir = path.join(process.cwd(), 'assets/txt/home');
   const txtFileNames = await fs.readdir(homeTxtDir);
 
   const txtContent = await Promise.all(

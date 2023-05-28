@@ -1,4 +1,0 @@
-About The Site
-
-Welcome to lucianod.me! My name is Luciano De Gianni. This site serves as both a portfolio for myself and as sandbox for testing web technologies.
-Please take a look around and let me know what you think!

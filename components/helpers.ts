@@ -19,8 +19,7 @@ export interface WorkExperienceContent {
   position: string;
   description: string;
   experience: Array<{
-    title: string;
-    points: Array<string>;
+    point: string | Array<string>;
   }>;
 }
 

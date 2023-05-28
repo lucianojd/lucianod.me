@@ -26,6 +26,13 @@ h3 {
   margin: 5px 0px;
 }
 
+h4 {
+  padding: 0px 0px;
+  margin: 5px 0px;
+  font-weight: 300;
+  font-style: italic;
+}
+
 p {
   font-size: 1rem;
 }
@@ -55,31 +62,8 @@ button {
   }
 }
 
-table {
-  background-color: $secondary;
-  color: black;
-  border-radius: 15px;
-  padding: 15px;
-  box-shadow: 10px 10px 20px 1px black;
-  border: 1px solid black;
-  border-collapse: collapse;
-
-  thead {
-    background-color: $highlight;
-
-    tr {
-      th {
-        border-bottom: 1px solid black;
-      }
-    }
-  }
-
-  tbody {
-    tr {
-      border: 1px solid black;
-
-      td {
-      }
-    }
+ul {
+  li {
+    margin: 5px;
   }
 }

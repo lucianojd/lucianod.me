@@ -1,0 +1,17 @@
+@import '../variables.module.scss';
+
+.container {
+  background-color: $primary;
+  color: black;
+
+  padding: 10px;
+
+  border-radius: 15px;
+  box-shadow: 1px 1px 3px 1px black;
+
+  p {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: $highlight;
+  }
+}
