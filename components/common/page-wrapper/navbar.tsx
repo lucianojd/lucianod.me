@@ -17,10 +17,8 @@ function Navbar({ items }: NavbarProps) {
       </span>
       <ul id="pages">
         {items.map(({ name, path }, index) => (
-          <li>
-            <Link key={index} href={path}>
-              {name}
-            </Link>
+          <li key={index}>
+            <Link href={path}>{name}</Link>
           </li>
         ))}
       </ul>
