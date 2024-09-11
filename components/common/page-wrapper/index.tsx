@@ -3,11 +3,12 @@ import Header from './header';
 
 import { memo } from 'react';
 import Head from 'next/head';
+import Footer from './footer';
 
 interface PageWrapperProps {
   children: React.ReactNode;
   head: {
-    title?: string;
+    title: string;
     content: string;
   };
 }
@@ -27,6 +28,7 @@ function PageWrapper({
       </Head>
       <Header />
       <main>{children}</main>
+      <Footer />
     </>
   );
 }

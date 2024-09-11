@@ -8,7 +8,7 @@ import {
 } from 'next';
 import path from 'path';
 import PageWrapper from '@components/common/page-wrapper';
-import Technologies from '@components/core/technologies';
+import Hero from '@components/core/hero';
 
 interface HomeStaticProps {
   txtContent: Array<ParagraphContent>;
@@ -38,11 +38,8 @@ const Home: NextPage<HomeStaticProps> = ({
   txtContent,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <PageWrapper head={{ content: 'This is the home page.' }}>
-      <Technologies />
-      {txtContent.map((content, index) => (
-        <TextBlock key={index} {...content} />
-      ))}
+    <PageWrapper head={{ title: "home", content: 'This is the home page.' }}>
+      <Hero />
     </PageWrapper>
   );
 };

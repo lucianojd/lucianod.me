@@ -1,9 +1,16 @@
-$background-color: #262626;
+$background-color: 	#312e28;
 $tertiary: #6f6f6f;
 $secondary: #919191;
 $primary: #bfbfbf;
-$highlight: #00838f;
 $text-color: white;
+
+$highlight: #4a6741;
+
+$forest-green-1: #4a6741;	// rgb(74,103,65)
+$forest-green-2: #3f5a36;	// rgb(63,90,54)
+$forest-green-3: #374f2f;	// rgb(55,79,47)
+$forest-green-4: #304529;	// rgb(48,69,41)
+$forest-green-5: #22311d; // rgb(34,49,29)
 
 $mobile-width: 326px;
 $tablet-width: 768px;
@@ -29,14 +36,14 @@ $desktop-width: 1024px;
 
 @mixin auto-width {
   @include mobile {
-    width: 80%;
+    width: 100%;
   }
 
   @include tablet {
-    width: 70%;
+    width: 100%;
   }
 
   @include desktop {
-    width: 50%;
+    width: 100%;
   }
 }

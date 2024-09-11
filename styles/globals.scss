@@ -16,21 +16,7 @@ h1 {
 }
 
 h2 {
-  padding: 0px 0px;
-  margin: 10px 0px;
   font-size: 2rem;
-}
-
-h3 {
-  padding: 0px 0px;
-  margin: 5px 0px;
-}
-
-h4 {
-  padding: 0px 0px;
-  margin: 5px 0px;
-  font-weight: 300;
-  font-style: italic;
 }
 
 p {
@@ -39,21 +25,14 @@ p {
 
 header {
   margin: auto;
-  @include auto-width();
+}
+
+main {
+  margin: auto;
 }
 
 footer {
-  margin: 10px auto;
-  padding: 10px;
-  @include auto-width();
-
-  border-radius: 10px;
-
-  color: black;
-  background-color: $highlight;
-
-  display: flex;
-  justify-content: space-between;
+  margin: auto;
 }
 
 button {
