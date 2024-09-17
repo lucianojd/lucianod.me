@@ -15,13 +15,6 @@ function Navbar({ items }: NavbarProps) {
       <span id="logo">
         <Link href={'/'}>{SITE_NAME}</Link>
       </span>
-      <ul id="pages">
-        {items.map(({ name, path }, index) => (
-          <li key={index}>
-            <Link href={path}>{name}</Link>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

@@ -13,7 +13,8 @@ function Hero() {
                 <div className={styles.imageGradient} />
                     <Image 
                         priority 
-                        src='/jungle.png' 
+                        src='/jungle.jpg'
+                        blurDataURL='/jungle_blur.jpg'
                         layout='fill' 
                         objectFit='cover' 
                         objectPosition="center" 

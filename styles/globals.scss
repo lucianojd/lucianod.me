@@ -11,18 +11,6 @@ body {
   color: $text-color;
 }
 
-h1 {
-  font-size: 3rem;
-}
-
-h2 {
-  font-size: 2rem;
-}
-
-p {
-  font-size: 1rem;
-}
-
 header {
   margin: auto;
 }
@@ -38,11 +26,5 @@ footer {
 button {
   &:hover {
     cursor: pointer;
-  }
-}
-
-ul {
-  li {
-    margin: 5px;
   }
 }
