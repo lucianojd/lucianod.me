@@ -38,3 +38,8 @@ next-env.d.ts
 # custom
 secrets/
 .env
+
+# SSL certificates
+*.key
+*.crt
+*.csr
