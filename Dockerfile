@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:25-bookworm-slim
 
 EXPOSE 3000
 
