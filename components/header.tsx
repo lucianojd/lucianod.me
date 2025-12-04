@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import React from 'react';
 
-function Header(): JSX.Element {
+function Header(): React.JSX.Element {
   return (
     <header>
       <div>

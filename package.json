@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -12,22 +12,28 @@
     "prettier:fix": "npx prettier components styles pages  --write"
   },
   "dependencies": {
-    "next": "12.3.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "eslint-config-next": "16.0.7",
+    "next": "16.0.7",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
     "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@svgr/webpack": "8.1.0",
     "@types/node": "18.7.23",
-    "@types/react": "18.0.21",
-    "@types/react-dom": "18.0.6",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
     "@typescript-eslint/eslint-plugin": "8",
     "@typescript-eslint/parser": "8",
     "eslint": "9",
     "eslint-config-prettier": "^8.7.0",
     "prettier": "^2.8.4",
-    "sass": "^1.55.0",
+    "sass": "^1.94.2",
     "typescript": "*"
+  },
+  "resolutions": {
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3"
   }
 }
