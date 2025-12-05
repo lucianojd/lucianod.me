@@ -9,8 +9,8 @@ function Navbar() {
     <span className="navbar">
       <ul>
         {pages.map((page) => (
-          <a href={page.link}>
-            <li key={page.name}>{page.name}</li>
+          <a key={page.name} href={page.link}>
+            <li>{page.name}</li>
           </a>
         ))}
       </ul>

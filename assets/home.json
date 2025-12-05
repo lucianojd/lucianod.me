@@ -1,0 +1,63 @@
+{
+    "education": [
+        {
+            "institution": "University of Victoria",
+            "degree": "Bachelor of Software Engineering, Co-op Program",
+            "startDate": "2018-09-01",
+            "endDate": "2022-04-30"
+        },
+        {
+            "institution": "University of the Fraser Valley",
+            "degree": "Engineering Transfer Program",
+            "startDate": "2016-09-01",
+            "endDate": "2018-04-30"
+        }
+    ],
+    "aboutMe": {
+        "description": "I am a software engineer who has been working in the industry since 2019. I started my journey as a QA Analyst during my co-op program at the University of Victoria (UVic) and since then have had multiple software development roles."
+    },
+    "workExperience": [
+        {
+            "company": "Ministry of Health",
+            "position": "Full Stack Developer",
+            "location": "New Westminster, B.C.",
+            "startDate": "2023-10-23",
+            "endDate": "Present",
+            "experience": [
+                "Developed a scalable routine with JavaScript for parsing ServiceNow case records into a PDF file",
+                "Collaborated with multiple parties to create an integration for ServiceNow and Jira",
+                "Coordinated with several program area representatives, our ServiceNow admin, the development team, system architect, and our scrum master to deploy a platform wide feature spanning several months",
+                "Worked with another team to create a citizen developer initiative saving them over $7500 and earning a nomination for an internal award"
+            ]
+        },
+        {
+            "company": "Airble Aviation Inc.",
+            "position": "Full Stack Developer",
+            "location": "Richmond, B.C",
+            "startDate": "2022-04-14",
+            "endDate": "2023-10-14",
+            "experience": [
+                "Utilized Apollo GraphQL to collect and analyze metrics and improved the performance of a backend endpoint by 80% by optimizing SQL statements and server logic",
+                "Enabled marketing to create ads for specific flights by utilizing multiple TypeScript libraries to store the current webpage’s state in the URL parameters",
+                "Developed React components to be extensible and easily replicable through their structure and utilizing features of CSS and SCSS such as CSS variables and media queries",
+                "Improved page loading performance by as much as 80% by configuring the built in optimization and caching features of the Next.js JavaScript framework",
+                "Completed endpoints and UI components for a payment processing feature on a JavaScript REST API by integrating with PayPal’s API within 2 months",
+                "Evaluated and analyzed a legacy API and determined a secure and performant method to host customers’ invoices using the API for authentication and NGINX’s authentication to protect directories combined with HTTP headers to prevent caching and indexing",
+                "Built a custom in-house utility using Bash for installing Homebrew, necessary packages, cloning the platforms repos, and connecting the developers machine to our staging servers via TLS using certificate authentication abstracting away unnecessary training and configurations steps",
+                "Built a custom deployment utility using Bash for pulling the changes for each repo, building the application, and deploying the application delivering reliable and consistent deployments"
+            ]
+        },
+        {
+            "company": "TENZR Health",
+            "position": "Software/DevOps Developer",
+            "location": "Surrey, B.C.",
+            "startDate": "2021-09-01",
+            "endDate": "2021-12-31",
+            "experience": [
+                "Completed a UI walk through framework and developer settings page for an iOS and UWP mobile application built using C# and Xamarin with Visual Studio as an IDE",
+                "Saved all developers on average an hour a day by building an automated versioning scheme using Git, Bitbucket, and AzureDevOps enabling accurate bug reporting and making build commits easier to find",
+                "Planned, designed, developed, and deployed a containerized cloud service using Docker, TypeScript, and Express.js for supporting the mobile application to be hosted on a specialized cloud within 2 months"
+            ]
+        }
+    ]
+}

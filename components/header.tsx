@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import React from 'react';
+import { JSX } from 'react';
 
-function Header(): React.JSX.Element {
+function Header(): JSX.Element {
   return (
     <header>
       <div>
@@ -10,7 +10,7 @@ function Header(): React.JSX.Element {
       </div>
       <div className="image-container">
         <Image
-          layout="fill"
+          fill
           alt="Cubed Earth image"
           src="/cubed_earth.png"
           placeholder="empty"

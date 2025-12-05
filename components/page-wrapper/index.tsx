@@ -5,7 +5,7 @@ import Head from 'next/head';
 interface PageWrapperProps {
   children?: React.ReactNode;
   head: {
-    title: string;
+    title?: string;
     content: string;
   };
 }

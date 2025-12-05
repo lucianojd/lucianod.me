@@ -7,11 +7,11 @@ const Experience: NextPage = () => {
   return (
     <PageWrapper
       head={{
-        title: 'project',
         content: 'Page containing a list of my projects.',
       }}
     >
       <Header />
+      <main></main>
       <Navbar />
     </PageWrapper>
   );

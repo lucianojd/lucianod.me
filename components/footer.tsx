@@ -1,6 +1,6 @@
-import React from 'react';
+import { JSX } from 'react';
 
-function Footer(): React.JSX.Element {
+function Footer(): JSX.Element {
   return (
     <footer>
       <a href="/">lucianod.me</a>

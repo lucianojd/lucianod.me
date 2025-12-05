@@ -15,57 +15,81 @@ type WorkExperience = {
   experience: string[];
 };
 
+type AboutMe = {
+  description: string;
+};
+
+type Education = {
+  institution: string;
+  degree: string;
+  startDate: string;
+  endDate: string;
+};
+
 export const getStaticProps: GetStaticProps<{
   workExperience: WorkExperience[];
+  aboutMe: AboutMe;
+  education: Education[];
 }> = async () => {
   const assetsDir = path.join(process.cwd(), 'assets');
-  const professionalExperienceFile = path.join(assetsDir, 'professional_experience.json');
+  const professionalExperienceFile = path.join(assetsDir, 'home.json');
 
   const data = fs.readFileSync(professionalExperienceFile, 'utf-8');
-  const parsedData = JSON.parse(data);
+  const { workExperience, aboutMe, education } = JSON.parse(data);
 
   return {
     props: {
-      workExperience: parsedData,
+      workExperience,
+      aboutMe,
+      education,
     },
   };
 };
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({workExperience}) => {
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  workExperience,
+  aboutMe,
+  education,
+}) => {
   return (
-    <PageWrapper head={{ title: 'home', content: 'This is the home page.' }}>
+    <PageWrapper head={{ content: 'This is the home page.' }}>
       <Header />
       <Navbar />
       <main>
         <h1>About me</h1>
-        <p>
-          I am software engineer who has been working in the industry since
-          2019. I started my journey as a QA Analyst during my co-op program at
-          the University of Victoria (UVic) and since then have had multiple
-          software development roles.
-        </p>
+        <p>{aboutMe.description}</p>
         <h1>Professional Experience</h1>
-        {workExperience.map(({company, position, location, startDate, endDate, experience}, i) => {
-          return (
-            <div key={i}>
-              <h2>{company} - {position}; {location}</h2>
-              <h3>{startDate} - {endDate}</h3>
-              <ul>
-                {experience.map((item, index) => (<li key={index}>{item}</li>))}
-              </ul>
-            </div>
-          )
-        })}
+        {workExperience.map(
+          (
+            { company, position, location, startDate, endDate, experience },
+            i
+          ) => {
+            return (
+              <div key={i}>
+                <h2>
+                  {company} - {position}; {location}
+                </h2>
+                <h3>
+                  {startDate} - {endDate}
+                </h3>
+                <ul>
+                  {experience.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            );
+          }
+        )}
         <h1>Education</h1>
-        <h2>University of Victoria</h2>
-        <h3>
-          Bachelor of Software Engineering, Co-op Program; Sept. 2018 - April
-          2022
-        </h3>
-        <h2>University of the Fraser Valley</h2>
-        <h3>
-          Completed the Engineering Transfer program; Sept. 2016 - April 2018
-        </h3>
+        {education.map(({ institution, degree, endDate, startDate }, index) => (
+          <div key={index}>
+            <h2>{institution}</h2>
+            <h3>
+              {degree}; {startDate} - {endDate}
+            </h3>
+          </div>
+        ))}
       </main>
       <Footer />
     </PageWrapper>

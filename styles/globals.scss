@@ -65,7 +65,11 @@ header {
   overflow: hidden;
 
   background-color: vars.$maroon;
-  background-image: linear-gradient(180deg, vars.$maroon-light, vars.$maroon-dark);
+  background-image: linear-gradient(
+    180deg,
+    vars.$maroon-light,
+    vars.$maroon-dark
+  );
 
   ul {
     list-style-type: none;

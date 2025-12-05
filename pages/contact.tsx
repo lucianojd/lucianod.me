@@ -5,11 +5,10 @@ import Navbar from '@components/navbar';
 
 const Experience: NextPage = () => {
   return (
-    <PageWrapper
-      head={{ title: 'contact', content: 'Form for contacting me.' }}
-    >
+    <PageWrapper head={{ content: 'Form for contacting me.' }}>
       <Header />
       <Navbar />
+      <main></main>
     </PageWrapper>
   );
 };
