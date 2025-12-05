@@ -9,5 +9,8 @@
   "editor.codeActionsOnSave": [
     "source.formatDocument",
     "source.fixAll.eslint"
-  ]
+  ],
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }
