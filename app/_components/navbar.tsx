@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 function Navbar() {
   const pages = [
     { name: 'Home', link: '/' },
@@ -9,9 +11,9 @@ function Navbar() {
     <span className="navbar">
       <ul>
         {pages.map((page) => (
-          <a key={page.name} href={page.link}>
+          <Link key={page.name} href={page.link}>
             <li>{page.name}</li>
-          </a>
+          </Link>
         ))}
       </ul>
     </span>
