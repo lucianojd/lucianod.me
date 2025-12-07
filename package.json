@@ -6,8 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint app",
+    "lint:fix": "eslint app --fix",
     "prettier": "npx prettier app styles --check",
     "prettier:fix": "npx prettier app styles  --write"
   },
