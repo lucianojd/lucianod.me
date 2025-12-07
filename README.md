@@ -4,3 +4,5 @@ MyWebsite is meant to be an extension of my resume. It contains pages discussing
 interests, skills, education and projects.
 
 Here is the color palette I used: [Colour Palette](https://colorhunt.co/palette/bf092f13244016476a3b9797)
+
+Icons and logos obtained from official branding site or [VectorLogoZone](https://www.vectorlogo.zone/)

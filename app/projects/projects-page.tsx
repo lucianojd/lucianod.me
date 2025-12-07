@@ -1,22 +1,34 @@
 import Link from 'next/link';
+import type { Project } from './page';
+import Icon from '@app/_components/Icon';
 
-export default function ProjectsPage() {
+type ProjectPageProps = {
+  projects: Project[];
+};
+
+export default function ProjectsPage({ projects }: ProjectPageProps) {
   return (
     <main>
       <h1>Projects</h1>
-      <p>
-        Welcome to the Projects Page. Here you will find a list of my projects.
-      </p>
-      <h1>More about me</h1>
-      <ul>
-        <li>
-          <Link href="https://github.com/lucianojd">My GitHub profile</Link>
-        </li>
-        <li>
-          <Link href="https://www.linkedin.com/in/lucianojd/">
-            My LinkedIn profile
-          </Link>
-        </li>
+      <ul className="project">
+        {projects.map((project) => (
+          <li key={project.name}>
+            <Link
+              className="project-card"
+              href={project.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {project.name}
+            </Link>
+            <p>{project.subtitle}</p>
+            <section className="icon-list">
+              {project.icons.map((icon) => (
+                <Icon key={icon} name={icon} />
+              ))}
+            </section>
+          </li>
+        ))}
       </ul>
     </main>
   );

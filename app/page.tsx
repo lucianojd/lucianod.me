@@ -8,9 +8,9 @@ export default async function Page() {
   // Forward fetched data to your Client Component
 
   const assetsDir = path.join(process.cwd(), 'app/_assets');
-  const professionalExperienceFile = path.join(assetsDir, 'home.json');
+  const dataFile = path.join(assetsDir, 'home.json');
 
-  const data = fs.readFileSync(professionalExperienceFile, 'utf-8');
+  const data = fs.readFileSync(dataFile, 'utf-8');
   const parsedData = JSON.parse(data);
 
   return <HomePage {...parsedData} />;

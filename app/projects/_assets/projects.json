@@ -1,0 +1,44 @@
+[
+  {
+    "name": "pluto",
+    "subtitle": "Deployment configuration for my digital ocean droplet.",
+    "description": "",
+    "repo": "https://github.com/lucianojd/pluto",
+    "tags": ["nginx", "docker", "docker compose", "compose"],
+    "icons": [
+      "nginx",
+      "docker",
+      "linux",
+      "nodejs",
+      "cloudflare",
+      "digitalocean",
+      "vscode"
+    ]
+  },
+  {
+    "name": "lucianod.me",
+    "subtitle": "Source code for my personal website.",
+    "description": "",
+    "repo": "https://github.com/lucianojd/lucianod.me",
+    "tags": ["docker", "next.js", "scss", "typescript"],
+    "icons": [
+      "docker",
+      "javascript",
+      "sass",
+      "typescript",
+      "nodejs",
+      "reactjs",
+      "yarn",
+      "nextjs",
+      "vscode"
+    ]
+  },
+  {
+    "name": "dt",
+    "subtitle": "A python application for transforming csv files. Used to assist with tracking finances.",
+    "description": "",
+    "repo": "https://github.com/lucianojd/dt",
+    "tags": ["docker", "next.js", "scss", "typescript"],
+    "icons": ["python", "vscode"]
+  }
+]
