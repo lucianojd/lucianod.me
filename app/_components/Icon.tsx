@@ -18,7 +18,12 @@ export type Name =
   | 'cloudflare'
   | 'digitalocean'
   | 'yarn'
-  | 'vscode';
+  | 'vscode'
+  | 'graphql'
+  | 'mysql'
+  | 'pm2'
+  | 'redis'
+  | 'expo';
 
 type IconProps = {
   name: Name;
@@ -62,6 +67,16 @@ function getAlt(name: Name): string {
       return 'Yarn';
     case 'vscode':
       return 'VSCode';
+    case 'graphql':
+      return 'GraphQL';
+    case 'mysql':
+      return 'MySQL';
+    case 'pm2':
+      return 'PM2';
+    case 'redis':
+      return 'Redis';
+    case 'expo':
+      return 'Expo';
     default:
       return '';
   }
@@ -101,6 +116,16 @@ function getLink(name: Name): string {
       return 'https://yarnpkg.com';
     case 'vscode':
       return 'https://code.visualstudio.com';
+    case 'graphql':
+      return 'https://graphql.org';
+    case 'mysql':
+      return 'https://www.mysql.com';
+    case 'pm2':
+      return 'https://pm2.keymetrics.io';
+    case 'redis':
+      return 'https://redis.io';
+    case 'expo':
+      return 'https://expo.dev';
     default:
       return '';
   }
@@ -124,6 +149,11 @@ export function isIconName(name: string): name is Name {
     'digitalocean',
     'yarn',
     'vscode',
+    'graphql',
+    'mysql',
+    'pm2',
+    'redis',
+    'expo',
   ].includes(name);
 }
 

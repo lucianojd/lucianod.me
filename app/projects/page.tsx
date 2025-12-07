@@ -20,7 +20,7 @@ export default async function Page() {
   const parsedData: Project[] = JSON.parse(data);
 
   parsedData.forEach((project) => {
-    project.icons = project.icons.filter((icon) => isIconName(icon));
+    project.icons = project.icons.filter((icon) => isIconName(icon)).sort();
   });
 
   return <ProjectsPage projects={parsedData} />;

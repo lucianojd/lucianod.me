@@ -2,9 +2,7 @@
   {
     "name": "pluto",
     "subtitle": "Deployment configuration for my digital ocean droplet.",
-    "description": "",
     "repo": "https://github.com/lucianojd/pluto",
-    "tags": ["nginx", "docker", "docker compose", "compose"],
     "icons": [
       "nginx",
       "docker",
@@ -18,9 +16,7 @@
   {
     "name": "lucianod.me",
     "subtitle": "Source code for my personal website.",
-    "description": "",
     "repo": "https://github.com/lucianojd/lucianod.me",
-    "tags": ["docker", "next.js", "scss", "typescript"],
     "icons": [
       "docker",
       "javascript",
@@ -36,9 +32,66 @@
   {
     "name": "dt",
     "subtitle": "A python application for transforming csv files. Used to assist with tracking finances.",
-    "description": "",
     "repo": "https://github.com/lucianojd/dt",
-    "tags": ["docker", "next.js", "scss", "typescript"],
     "icons": ["python", "vscode"]
+  },
+  {
+    "name": "Airble.com",
+    "subtitle": "Marketplace for private charter flights. Worked as a full stack developer.",
+    "repo": "https://airble.com/",
+    "icons": [
+      "typescript",
+      "javascript",
+      "yarn",
+      "reactjs",
+      "nodejs",
+      "nextjs",
+      "sass",
+      "vscode",
+      "graphql",
+      "mysql",
+      "pm2",
+      "redis"
+    ]
+  },
+  {
+    "name": "Airble iOS app",
+    "subtitle": "iOS application for Airble.com. Worked as a full stack developer.",
+    "repo": "https://apps.apple.com/us/app/airble-charter-flight-booking/id1511117163",
+    "icons": [
+      "typescript",
+      "javascript",
+      "yarn",
+      "reactjs",
+      "nodejs",
+      "nextjs",
+      "sass",
+      "vscode",
+      "graphql",
+      "mysql",
+      "pm2",
+      "redis",
+      "expo"
+    ]
+  },
+  {
+    "name": "Airble Android app",
+    "subtitle": "Android application for Airble.com. Worked as a full stack developer.",
+    "repo": "https://play.google.com/store/apps/details?id=com.airble.airble&hl=en_CA",
+    "icons": [
+      "typescript",
+      "javascript",
+      "yarn",
+      "reactjs",
+      "nodejs",
+      "nextjs",
+      "sass",
+      "vscode",
+      "graphql",
+      "mysql",
+      "pm2",
+      "redis",
+      "expo"
+    ]
   }
 ]
