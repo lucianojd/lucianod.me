@@ -23,7 +23,9 @@ export type Name =
   | 'mysql'
   | 'pm2'
   | 'redis'
-  | 'expo';
+  | 'expo'
+  | 'apple'
+  | 'android';
 
 type IconProps = {
   name: Name;
@@ -77,6 +79,10 @@ function getAlt(name: Name): string {
       return 'Redis';
     case 'expo':
       return 'Expo';
+    case 'apple':
+      return 'Apple';
+    case 'android':
+      return 'Android';
     default:
       return '';
   }
@@ -126,6 +132,10 @@ function getLink(name: Name): string {
       return 'https://redis.io';
     case 'expo':
       return 'https://expo.dev';
+    case 'apple':
+      return 'https://developer.apple.com';
+    case 'android':
+      return 'https://developer.android.com';
     default:
       return '';
   }
@@ -154,6 +164,8 @@ export function isIconName(name: string): name is Name {
     'pm2',
     'redis',
     'expo',
+    'apple',
+    'android',
   ].includes(name);
 }
 

@@ -58,40 +58,20 @@
     "name": "Airble iOS app",
     "subtitle": "iOS application for Airble.com. Worked as a full stack developer.",
     "repo": "https://apps.apple.com/us/app/airble-charter-flight-booking/id1511117163",
-    "icons": [
-      "typescript",
-      "javascript",
-      "yarn",
-      "reactjs",
-      "nodejs",
-      "nextjs",
-      "sass",
-      "vscode",
-      "graphql",
-      "mysql",
-      "pm2",
-      "redis",
-      "expo"
-    ]
+    "icons": ["yarn", "reactjs", "nodejs", "vscode", "graphql", "expo", "apple"]
   },
   {
     "name": "Airble Android app",
     "subtitle": "Android application for Airble.com. Worked as a full stack developer.",
     "repo": "https://play.google.com/store/apps/details?id=com.airble.airble&hl=en_CA",
     "icons": [
-      "typescript",
-      "javascript",
       "yarn",
       "reactjs",
       "nodejs",
-      "nextjs",
-      "sass",
       "vscode",
       "graphql",
-      "mysql",
-      "pm2",
-      "redis",
-      "expo"
+      "expo",
+      "android"
     ]
   }
 ]
