@@ -3,6 +3,8 @@ import '@styles/globals.scss';
 import Footer from './_components/footer';
 import Header from './_components/header';
 import Navbar from './_components/navbar';
+import Script from 'next/script';
+import { CLOUD_FLARE_TURNSTILE } from './_constants';
 
 export const metadata: Metadata = {
   title: 'lucianod.me',
@@ -16,6 +18,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
+  
 };
 
 export default function RootLayout({
@@ -27,6 +30,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <Script async defer src={'https://challenges.cloudflare.com/turnstile/v0/api.js'} />
+      </head>
       <body>
         <Header />
         <Navbar />
