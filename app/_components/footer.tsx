@@ -7,7 +7,7 @@ function Footer(): JSX.Element {
   return (
     <footer>
       <Link href="/">
-        <Image fill alt="lucianod.me" src={'/cubed_earth.png'} />
+        <Image loading='eager' fill alt="lucianod.me" src={'/cubed_earth.png'} />
       </Link>
       <Icon name="github" />
       <Icon name="linkedin" />
