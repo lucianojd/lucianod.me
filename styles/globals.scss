@@ -184,11 +184,16 @@ ul.project {
   }
 }
 
-section.todays-photo {
+section.apod {
   position: relative;
   display: flex;
 
   @include vars.desktop {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  @include vars.tablet {
     flex-direction: row-reverse;
     justify-content: space-between;
   }
@@ -202,7 +207,7 @@ section.todays-photo {
   margin-bottom: 10px;
   border-radius: 15px;
 
-  div.image {
+  div.media {
     position: relative;
     aspect-ratio: 1/1;
     border-radius: 15px;
@@ -212,10 +217,40 @@ section.todays-photo {
       width: 50%;
       margin-left: 10px;
     }
+
+    @include vars.tablet {
+      width: 50%;
+      margin-left: 10px;
+    }
+  }
+
+  div.video {
+    position: relative;
+    aspect-ratio: 1/1;
+
+    @include vars.desktop {
+      width: 50%;
+      margin-left: 10px;
+    }
+
+    @include vars.tablet {
+      width: 50%;
+      margin-left: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   div.blurb {
     @include vars.desktop {
+      position: relative;
+      width: 50%;
+    }
+
+    @include vars.tablet {
       position: relative;
       width: 50%;
     }

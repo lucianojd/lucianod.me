@@ -1,7 +1,7 @@
 'use server';
 
 import ApodPage from './apod-page';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { NASA } from '@app/_constants';
 import { connection } from 'next/server';
 
@@ -51,7 +51,15 @@ export default async function Page() {
   try {
     const nasaMedia: NasaMedia = await loadNasaMedia();
     return <ApodPage fetchedNasaMedia={[nasaMedia]} />;
-  } catch (_) {
-    return <div>{}</div>;
+  } catch (e: unknown) {
+    if (e instanceof AxiosError) {
+      return (
+        <main>
+          <h1>{`Unable to load astronomy picture of the day`}</h1>
+          <h2>{`Looks like there was an error on our end :(`}</h2>
+        </main>
+      );
+    }
+    return <main>Something really went wrong</main>;
   }
 }
