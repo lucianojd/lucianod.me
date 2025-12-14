@@ -10,6 +10,14 @@ export default function ProjectsPage({ projects }: ProjectPageProps) {
   return (
     <main>
       <h1>Projects</h1>
+      <h2>On this Site</h2>
+      <h3>APOD (Astronomy Picture of the Day)</h3>
+      <p>
+        Checkout the latest{' '}
+        <Link href={'/apod'}>astronomy picture of the day</Link> from NASA
+        themselves!
+      </p>
+      <h2>External to this Website</h2>
       <ul className="project">
         {projects.map((project) => (
           <li key={project.name}>

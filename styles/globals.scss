@@ -67,6 +67,7 @@ a {
   position: sticky;
   top: 0;
   overflow: hidden;
+  z-index: 999;
 
   background-color: vars.$maroon;
   background-image: linear-gradient(
@@ -180,5 +181,43 @@ ul.project {
   a.project-card {
     text-decoration: underline;
     font-size: 1.7rem;
+  }
+}
+
+section.todays-photo {
+  position: relative;
+  display: flex;
+
+  @include vars.desktop {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  @include vars.mobile {
+    flex-direction: column;
+  }
+
+  background-color: vars.$navy;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+
+  div.image {
+    position: relative;
+    aspect-ratio: 1/1;
+    border-radius: 15px;
+    overflow: hidden;
+
+    @include vars.desktop {
+      width: 50%;
+      margin-left: 10px;
+    }
+  }
+
+  div.blurb {
+    @include vars.desktop {
+      position: relative;
+      width: 50%;
+    }
   }
 }
