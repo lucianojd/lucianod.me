@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { JSX } from 'react';
+import Icon from './Icon';
 
 function Header(): JSX.Element {
   return (
@@ -9,14 +9,7 @@ function Header(): JSX.Element {
         <h2>Software Engineer</h2>
       </div>
       <div className="image-container">
-        <Image
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          loading="eager"
-          alt="Cubed Earth image"
-          src="/cubed_earth.png"
-          placeholder="empty"
-        />
+        <Icon name="earth" />
       </div>
     </header>
   );
