@@ -25,7 +25,8 @@ export type Name =
   | 'redis'
   | 'expo'
   | 'apple'
-  | 'android';
+  | 'android'
+  | 'earth';
 
 type IconProps = {
   name: Name;
@@ -83,6 +84,8 @@ function getAlt(name: Name): string {
       return 'Apple';
     case 'android':
       return 'Android';
+    case 'earth':
+      return 'Earth';
     default:
       return '';
   }
@@ -136,6 +139,8 @@ function getLink(name: Name): string {
       return 'https://developer.apple.com';
     case 'android':
       return 'https://developer.android.com';
+    case 'earth':
+      return '/';
     default:
       return '';
   }
@@ -166,6 +171,7 @@ export function isIconName(name: string): name is Name {
     'expo',
     'apple',
     'android',
+    'earth',
   ].includes(name);
 }
 

@@ -11,3 +11,8 @@ export const CLOUD_FLARE_TURNSTILE = {
     SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '',
     SECRET_KEY: process.env.TURNSTILE_SECRET_KEY ?? '',
 }
+
+export const NASA = {
+  API_URL: 'https://api.nasa.gov/planetary/apod',
+  API_KEY: process.env.NASA_API_KEY,
+};

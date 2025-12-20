@@ -54,7 +54,7 @@ header {
     position: relative;
     aspect-ratio: 1/1;
     width: auto;
-    height: 100%;
+    height: 90%;
   }
 }
 
@@ -67,6 +67,7 @@ a {
   position: sticky;
   top: 0;
   overflow: hidden;
+  z-index: 999;
 
   background-color: vars.$maroon;
   background-image: linear-gradient(
@@ -213,6 +214,80 @@ form {
 
     &:hover {
       background-color: vars.$maroon-dark;
+    }
+  }
+}
+
+section.apod {
+  position: relative;
+  display: flex;
+
+  @include vars.desktop {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  @include vars.tablet {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  @include vars.mobile {
+    flex-direction: column;
+  }
+
+  background-color: vars.$navy;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+
+  div.image {
+    position: relative;
+    aspect-ratio: 1/1;
+    border-radius: 15px;
+    overflow: hidden;
+
+    @include vars.desktop {
+      width: 50%;
+      margin-left: 10px;
+    }
+
+    @include vars.tablet {
+      width: 50%;
+      margin-left: 10px;
+    }
+  }
+
+  div.video {
+    position: relative;
+    aspect-ratio: 1/1;
+
+    @include vars.desktop {
+      width: 50%;
+      margin-left: 10px;
+    }
+
+    @include vars.tablet {
+      width: 50%;
+      margin-left: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  }
+
+  div.blurb {
+    @include vars.desktop {
+      position: relative;
+      width: 50%;
+    }
+
+    @include vars.tablet {
+      position: relative;
+      width: 50%;
     }
   }
 }

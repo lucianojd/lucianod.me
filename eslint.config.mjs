@@ -34,6 +34,7 @@ export default defineConfig([
 
         rules: {
             "no-console": "error",
+            "@typescript-eslint/no-unused-vars": "warn"
         },
         ignores: [
             "next.config.ts",
