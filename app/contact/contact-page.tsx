@@ -1,4 +1,4 @@
-import ContactForm from "./contact-form";
+import ContactForm from './contact-form';
 
 function ContactPage() {
   return (
@@ -8,4 +8,4 @@ function ContactPage() {
     </main>
   );
 }
-export default ContactPage
+export default ContactPage;

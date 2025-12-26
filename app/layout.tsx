@@ -18,7 +18,6 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
-  
 };
 
 export default function RootLayout({
@@ -31,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script async defer src={'https://challenges.cloudflare.com/turnstile/v0/api.js'} />
+        <Script async defer src={CLOUD_FLARE_TURNSTILE.WIDGET_URL} />
       </head>
       <body>
         <Header />

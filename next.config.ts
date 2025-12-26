@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   sassOptions: {
     includePaths: ['./styles'],
   },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    }
+  },
   images: {
     remotePatterns: [
       {
