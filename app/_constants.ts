@@ -2,6 +2,8 @@ export const SITE_NAME = 'lucianod.me';
 
 export const ENVIRONMENT = process.env.ENVIRONMENT ?? 'development';
 
+export const RESEND_API_KEY = process.env.RESEND_API_KEY;
+
 export const EMAIL: {
   RECIPIENT: string;
   USER: string;
