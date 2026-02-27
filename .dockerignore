@@ -1,7 +1,10 @@
 Dockerfile
 node_modules/
+README.md
+
+.next
 .dockerignore
 .git
 .gitignore
 .env
-README.md
+.vscode

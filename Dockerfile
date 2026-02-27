@@ -1,14 +1,30 @@
-FROM node:25-alpine
+# Base image
+FROM node:24-alpine AS base
 
-EXPOSE 3000
+WORKDIR /app
+RUN npm install -g pnpm
 
-RUN mkdir /usr/app
-WORKDIR /usr/app
+# Build image
+FROM base AS builder
+WORKDIR /app
+COPY . .
 
 ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAACFiGNWG2Rq3LqGG
 
-COPY . .
-RUN yarn install --production
-RUN yarn next build
+RUN pnpm install --frozen-lockfile
+RUN pnpm build
 
-CMD ["yarn", "next", "start"]
+# Production image
+FROM node:24-alpine AS runner
+
+USER node
+WORKDIR /app
+
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+
+ENV HOSTNAME=0.0.0.0
+EXPOSE 3000
+
+CMD ["node", "server.js"]
