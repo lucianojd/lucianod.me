@@ -19,7 +19,7 @@ type CloudFlareVerificationResponse = {
 
 export async function submitContactForm(
   currentState: { success: boolean; message: string } | null,
-  formData: FormData
+  formData: FormData,
 ) {
   const name = formData.get('name') as string;
   const sender = formData.get('email') as string;
@@ -34,13 +34,13 @@ export async function submitContactForm(
         {
           secret: CLOUD_FLARE_TURNSTILE.SECRET_KEY,
           response: response,
-        }
+        },
       );
 
     if (turnstileResponse.success) {
       const resend = new Resend(RESEND_API_KEY);
 
-      const { data, error } = await resend.emails.send({
+      const { error } = await resend.emails.send({
         from: `${name} <contact@lucianod.me>`,
         to: [EMAIL.RECIPIENT],
         subject: subject,

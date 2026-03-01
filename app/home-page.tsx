@@ -39,7 +39,7 @@ export default function HomePage({
       {workExperience.map(
         (
           { company, position, location, startDate, endDate, experience },
-          i
+          i,
         ) => {
           return (
             <div key={i}>
@@ -56,7 +56,7 @@ export default function HomePage({
               </ul>
             </div>
           );
-        }
+        },
       )}
       <h1>Education</h1>
       {education.map(({ institution, degree, endDate, startDate }, index) => (

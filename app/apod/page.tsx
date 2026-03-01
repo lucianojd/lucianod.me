@@ -3,6 +3,7 @@
 import ApodPage from './apod-page';
 import axios, { AxiosError } from 'axios';
 import { NASA } from '@app/_constants';
+import { RedisService } from '@app/_components/server/redis';
 import { connection } from 'next/server';
 
 export interface NasaMedia {
@@ -37,14 +38,31 @@ export type ApodAPIResponse = {
 };
 
 async function loadNasaMedia(): Promise<NasaMedia> {
-  await connection();
-  const result = await axios.get(NASA.API_URL, {
-    params: {
-      api_key: NASA.API_KEY,
-    },
-  });
+  await connection(); // Ensure the connection is established before proceeding
+  const redisInstance = await RedisService.getInstance();
 
-  return result.data as NasaMedia;
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const todayKey = `apod:${year}-${month}-${day}`;
+
+  const cachedData = await redisInstance.get<NasaMedia>(todayKey);
+
+  if (cachedData) {
+    return cachedData;
+  } else {
+    const result = await axios.get(NASA.API_URL, {
+      params: {
+        api_key: NASA.API_KEY,
+      },
+    });
+
+    const nasaMedia = result.data as NasaMedia;
+    await redisInstance.set(todayKey, nasaMedia, 60 * 60 * 24);
+
+    return nasaMedia;
+  }
 }
 
 export default async function Page() {

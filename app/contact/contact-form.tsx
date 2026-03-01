@@ -7,13 +7,13 @@ import dynamic from 'next/dynamic';
 
 const Turnstile = dynamic(
   () => import('@app/_components/cloudflare-turnstile'),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function ContactForm() {
   const [formState, formAction, isPending] = useActionState(
     submitContactForm,
-    null
+    null,
   );
 
   if (formState == null) {
