@@ -1,42 +1,17 @@
 import { JSX } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-
-export type Name =
-  | 'docker'
-  | 'github'
-  | 'javascript'
-  | 'linkedin'
-  | 'nginx'
-  | 'python'
-  | 'reactjs'
-  | 'sass'
-  | 'typescript'
-  | 'nodejs'
-  | 'linux'
-  | 'nextjs'
-  | 'cloudflare'
-  | 'digitalocean'
-  | 'yarn'
-  | 'vscode'
-  | 'graphql'
-  | 'mysql'
-  | 'pm2'
-  | 'redis'
-  | 'expo'
-  | 'apple'
-  | 'android'
-  | 'earth';
+import type { IconName } from '@src/types/icon';
 
 type IconProps = {
-  name: Name;
+  name: IconName;
 };
 
-function getSrc(name: Name): string {
+function getSrc(name: IconName): string {
   return `/icons/${name}.svg`;
 }
 
-function getAlt(name: Name): string {
+function getAlt(name: IconName): string {
   switch (name) {
     case 'docker':
       return 'Docker';
@@ -91,7 +66,7 @@ function getAlt(name: Name): string {
   }
 }
 
-function getLink(name: Name): string {
+function getLink(name: IconName): string {
   switch (name) {
     case 'docker':
       return 'https://www.docker.com/';
@@ -146,7 +121,7 @@ function getLink(name: Name): string {
   }
 }
 
-export function isIconName(name: string): name is Name {
+export function isIconName(name: string): name is IconName {
   return [
     'docker',
     'github',
@@ -179,8 +154,8 @@ function Icon({ name }: IconProps): JSX.Element {
   if (!isIconName(name)) throw new Error(`Invalid icon name: ${name}`);
 
   return (
-    <Link href={getLink(name)}>
-      <Image fill alt={getAlt(name)} src={getSrc(name)} />
+    <Link className='footer-link' href={getLink(name)}>
+      <Image className='footer-image' fill alt={getAlt(name)} src={getSrc(name)} />
     </Link>
   );
 }

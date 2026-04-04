@@ -1,6 +1,6 @@
 'use client';
 
-import { CLOUD_FLARE_TURNSTILE } from '@app/_constants';
+import { CLOUD_FLARE_TURNSTILE } from '@src/constants';
 import { useEffect, useRef } from 'react';
 
 export default function CloudFlareTurnstile() {

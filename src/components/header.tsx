@@ -1,5 +1,5 @@
 import { JSX } from 'react';
-import Icon from './Icon';
+import Icon from './icon';
 
 function Header(): JSX.Element {
   return (

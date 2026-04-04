@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import '@styles/globals.scss';
-import Footer from './_components/footer';
-import Header from './_components/header';
-import Navbar from './_components/navbar';
+import Footer from '@src/components/footer';
+import Header from '@src/components/header';
 import Script from 'next/script';
-import { CLOUD_FLARE_TURNSTILE } from './_constants';
+import { CLOUD_FLARE_TURNSTILE } from '../src/constants';
 
 export const metadata: Metadata = {
   title: 'lucianod.me',
@@ -34,8 +33,9 @@ export default function RootLayout({
       </head>
       <body>
         <Header />
-        <Navbar />
-        {children}
+          <main>
+            {children}
+          </main> 
         <Footer />
       </body>
     </html>

@@ -2,8 +2,8 @@
 
 import ApodPage from './apod-page';
 import axios, { AxiosError } from 'axios';
-import { NASA } from '@app/_constants';
-import { RedisService } from '@app/_components/server/redis';
+import { NASA } from '@src/constants';
+import { RedisService } from '@src/components/server/redis';
 import { connection } from 'next/server';
 
 export interface NasaMedia {

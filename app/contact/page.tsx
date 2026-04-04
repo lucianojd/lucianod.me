@@ -1,21 +1,13 @@
 'use server';
 
 import ContactPage from './contact-page';
-import { EMAIL, CLOUD_FLARE_TURNSTILE, RESEND_API_KEY } from '@app/_constants';
+import { EMAIL, CLOUD_FLARE_TURNSTILE, RESEND_API_KEY } from '@src/constants';
 import axios from 'axios';
 import { Resend } from 'resend';
 import ContactEmailTemplate from './contact-email-template';
+import type { CloudFlareVerificationResponse } from '@src/types/cloudflare';
 
-type CloudFlareVerificationResponse = {
-  action: string;
-  cdata: string;
-  challenge_ts: string;
-  hostname: string;
-  metadata: {
-    interactive: boolean;
-  };
-  success: boolean;
-};
+
 
 export async function submitContactForm(
   currentState: { success: boolean; message: string } | null,

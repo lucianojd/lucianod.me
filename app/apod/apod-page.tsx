@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import type { NasaMedia, NasaImage, NasaVideo } from './page';
+import ApodImage from './apod-image';
+import ApodVideo from './apod-video';
 import Error from 'next/error';
-import dynamic from 'next/dynamic';
-
-const ApodImage = dynamic(() => import('./apod-image'));
-const ApodVideo = dynamic(() => import('./apod-video'));
 
 type MediaList = NasaMedia[];
 

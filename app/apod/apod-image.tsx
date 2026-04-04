@@ -22,9 +22,9 @@ function ApodImage({ media }: ApodImageProps) {
         <h2>{media.copyright}</h2>
         <p>{media.explanation}</p>
         <h3>{media.date}</h3>
-        <Link href={media.url}>Standard Definition</Link>
+        <Link className='blurb-url' href={media.url}>Standard Definition</Link>
         <br />
-        <Link href={media.hdurl}>High Definition</Link>
+        <Link className='blurb-url' href={media.hdurl}>High Definition</Link>
       </div>
     </section>
   );

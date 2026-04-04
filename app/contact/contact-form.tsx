@@ -3,12 +3,7 @@
 import { useActionState } from 'react';
 import { submitContactForm } from './page';
 import Form from 'next/form';
-import dynamic from 'next/dynamic';
-
-const Turnstile = dynamic(
-  () => import('@app/_components/cloudflare-turnstile'),
-  { ssr: false },
-);
+import Turnstile from '@src/components/cloudflare-turnstile';
 
 export default function ContactForm() {
   const [formState, formAction, isPending] = useActionState(

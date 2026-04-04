@@ -1,8 +1,4 @@
-interface ContactEmailTemplateProps {
-  message: string;
-  name: string;
-  email: string;
-}
+import type { ContactEmailTemplateProps } from '@src/types/email';
 
 export default function ContactEmailTemplate({
   message,

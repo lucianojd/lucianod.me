@@ -19,24 +19,15 @@ body {
   margin: 0;
   font-family: $font-family;
   color: white;
+}
 
-  header,
-  main,
-  footer {
-    padding-left: 5vw;
-    padding-right: 5vw;
-  }
+h1, h2, h3, p {
+  margin: 20px;
 
-  @include vars.desktop {
-    background-color: black;
-    header,
-    main,
-    footer,
-    .navbar {
-      margin-right: 5vw;
-      margin-left: 5vw;
-    }
-  }
+}
+
+a {
+  color: white;
 }
 
 input,
@@ -45,110 +36,38 @@ textarea {
 }
 
 header {
-  position: relative;
-  background-color: vars.$navy;
+  background-color: vars.$clouds-dark;
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 15vh;
 
-  h1,
-  h2 {
-    padding: 0px;
-    margin: 0px;
-    color: white;
-  }
-
-  h1 {
-    font-size: 1.7rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
-
   .image-container {
     position: relative;
     aspect-ratio: 1/1;
-    width: auto;
-    height: 90%;
-  }
-}
-
-a {
-  color: inherit;
-}
-
-.navbar {
-  display: flex;
-  position: sticky;
-  top: 0;
-  overflow: hidden;
-  z-index: 999;
-
-  background-color: vars.$maroon;
-  background-image: linear-gradient(
-    180deg,
-    vars.$maroon-light,
-    vars.$maroon-dark
-  );
-
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 1vh 0vw;
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    li {
-      text-align: center;
-      color: white;
-      font-size: 1.5rem;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
+    height: 70%;
   }
 }
 
 main {
   overflow: auto;
-  background-color: vars.$teal;
+  background-color: vars.$clouds-darkest;
 }
 
 footer {
-  background-color: vars.$navy;
-  display: flex;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
+  background-color: vars.$clouds-dark;
   height: 3vh;
-
-  @include vars.mobile {
-    height: 6vh;
-  }
-
-  @include vars.desktop {
-    min-height: 30px;
-  }
+  
+  display: flex;
+  align-items: center;
 
   a {
-    text-decoration: none;
-    position: relative;
+    margin: 0 10px;
+  }
 
-    height: 100%;
-    aspect-ratio: 1/1;
-    margin-right: 2vw;
-
-    @include vars.mobile {
-      margin-right: 5vw;
-    }
+  @include vars.mobile {
+    height: 10vh;
+    justify-content: space-around;
   }
 }
 
@@ -174,12 +93,6 @@ ul.project {
     @include vars.mobile {
       width: 100%;
     }
-
-    background-image: linear-gradient(
-      180deg,
-      vars.$navy-light,
-      vars.$navy-dark
-    );
   }
 
   section.icon-list {
@@ -188,11 +101,10 @@ ul.project {
 
     a {
       position: relative;
-      height: 5vh;
+      height: 3vh;
       min-height: 30px;
       aspect-ratio: 1/1;
-      margin: 5px;
-    }
+      margin-right: 1px;}
   }
 
   a.project-card {
@@ -212,7 +124,7 @@ form {
   textarea {
     padding: 0.5rem;
     font-size: 1rem;
-    border: 1px solid vars.$navy-dark;
+    border: 1px solid vars.$clouds-dark;
     border-radius: 5px;
   }
 
@@ -223,14 +135,14 @@ form {
   button {
     padding: 0.75rem;
     font-size: 1rem;
-    background-color: vars.$maroon;
+    background-color: vars.$clouds-medium;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
-      background-color: vars.$maroon-dark;
+      background-color: vars.$clouds-dark;
     }
   }
 }
@@ -238,6 +150,11 @@ form {
 section.apod {
   position: relative;
   display: flex;
+
+  .blurb-url {
+    color: vars.$clouds-light;
+    margin: 20px;
+  }
 
   @include vars.desktop {
     flex-direction: row-reverse;
@@ -253,16 +170,11 @@ section.apod {
     flex-direction: column;
   }
 
-  background-color: vars.$navy;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 15px;
+  background-color: vars.$clouds-darkest;
 
   div.image {
     position: relative;
     aspect-ratio: 1/1;
-    border-radius: 15px;
-    overflow: hidden;
 
     @include vars.desktop {
       width: 50%;
