@@ -41,7 +41,8 @@ jobs:
 
       - name: Deploy to Jupiter
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.JUPITER_USER }}@${{ secrets.JUPITER_HOST }}:/home/${{ secrets.JUPITER_USER }}/pluto \
-          "docker image pull ${{ secrets.DOCKERHUB_USERNAME }}/lucianod.me:latest && \
+          ssh -o StrictHostKeyChecking=no ${{ secrets.JUPITER_USER }}@${{ secrets.JUPITER_HOST }} \
+          "cd ~/pluto && \
+           docker image pull ${{ secrets.DOCKERHUB_USERNAME }}/lucianod.me:latest && \
            docker compose up --force-recreate -d && \
            docker image prune -f"
