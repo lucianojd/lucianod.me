@@ -26,7 +26,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-to: type=gha
 
   deploy:
     needs: build
