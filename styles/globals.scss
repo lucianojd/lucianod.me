@@ -20,11 +20,11 @@ body {
   margin: 0;
   font-family: $font-family;
   color: white;
+  background-color: vars.$clouds-medium;
 }
 
 h1, h2, h3, p {
   margin: 20px;
-
 }
 
 a {
@@ -48,11 +48,14 @@ header {
     aspect-ratio: 1/1;
     height: 70%;
   }
+
+  @include vars.responsive-width;
 }
 
 main {
   overflow: auto;
   background-color: vars.$clouds-darkest;
+  @include vars.responsive-width;
 }
 
 footer {
@@ -66,10 +69,7 @@ footer {
     margin: 0 10px;
   }
 
-  @include vars.mobile {
-    height: 10vh;
-    justify-content: space-around;
-  }
+  @include vars.responsive-width;
 }
 
 ul.project {
