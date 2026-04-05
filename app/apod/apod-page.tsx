@@ -35,9 +35,9 @@ export default function ApodPage({ fetchedNasaMedia }: ApodPageProps) {
   }, []);
 
   return (
-    <main>
+    <section>
       <h1>Astronomy Picture of the Day</h1>
       {today && <ApodMediaComponent media={today} />}
-    </main>
+    </section>
   );
 }

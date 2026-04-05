@@ -1,0 +1,12 @@
+name: blue_planet_dev
+services:
+  cache:
+    image: redis:latest
+    container_name: cache
+    volumes:
+      - cache-data:/data
+    ports:
+      - '6379:6379'
+    restart: unless-stopped
+volumes:
+  cache-data:
