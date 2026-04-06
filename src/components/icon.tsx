@@ -154,8 +154,8 @@ function Icon({ name }: IconProps): JSX.Element {
   if (!isIconName(name)) throw new Error(`Invalid icon name: ${name}`);
 
   return (
-    <Link className='footer-link' href={getLink(name)}>
-      <Image className='footer-image' fill alt={getAlt(name)} src={getSrc(name)} />
+    <Link href={getLink(name)}>
+      <Image fill alt={getAlt(name)} src={getSrc(name)} />
     </Link>
   );
 }

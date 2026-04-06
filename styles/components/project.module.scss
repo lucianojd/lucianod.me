@@ -1,0 +1,42 @@
+@use '@styles/variables.module.scss' as vars;
+
+ul.project {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+
+  li {
+    p {
+        margin: auto;
+    }
+
+    @include vars.desktop {
+      width: 40%;
+      margin: 10px;
+    }
+
+    @include vars.tablet {
+      width: 45vw;
+    }
+
+    @include vars.mobile {
+      width: 100%;
+    }
+  }
+
+  section.icon-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    a {
+        position: relative;
+        aspect-ratio: 1/1;
+        min-height: 30px;
+        margin-right: 5px;
+    }
+  }
+
+    a.project-card {
+        font-size: 1.7rem;
+    }
+}
