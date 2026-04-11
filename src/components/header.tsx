@@ -8,9 +8,7 @@ function Header(): JSX.Element {
         <h1>Luciano De Gianni</h1>
         <h2>Software Engineer</h2>
       </div>
-      <div className="image-container">
-        <Icon name="earth" />
-      </div>
+      <Icon containerClassName='image-container' name="earth" />
     </header>
   );
 }

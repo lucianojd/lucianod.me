@@ -5,6 +5,8 @@ import type { IconName } from '@src/types/icon';
 
 type IconProps = {
   name: IconName;
+  containerClassName?: string;
+  imageClassName?: string;
 };
 
 function getSrc(name: IconName): string {
@@ -150,12 +152,12 @@ export function isIconName(name: string): name is IconName {
   ].includes(name);
 }
 
-function Icon({ name }: IconProps): JSX.Element {
+function Icon({ name, containerClassName, imageClassName }: IconProps): JSX.Element {
   if (!isIconName(name)) throw new Error(`Invalid icon name: ${name}`);
 
   return (
-    <Link href={getLink(name)}>
-      <Image fill alt={getAlt(name)} src={getSrc(name)} />
+    <Link className={containerClassName} href={getLink(name)}>
+      <Image className={imageClassName} fill alt={getAlt(name)} src={getSrc(name)} />
     </Link>
   );
 }

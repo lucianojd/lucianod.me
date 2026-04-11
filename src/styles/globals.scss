@@ -1,6 +1,7 @@
-@use '@styles/variables.module.scss' as vars;
-@use '@styles/components/project.module.scss' as project;
-@use '@styles/components/apod.module.scss' as apod;
+@use '@src/styles/components/contact.module.scss' as contact;
+@use '@src/styles/variables.module.scss' as vars;
+@use '@src/styles/components/project.module.scss' as project;
+@use '@src/styles/components/apod.module.scss' as apod;
 
 $font-family:
   -apple-system,
@@ -45,9 +46,9 @@ header {
   height: 15vh;
 
   .image-container {
-    position: relative;
-    aspect-ratio: 1/1;
-    height: 70%;
+      position: relative;
+      aspect-ratio: 1/1;
+      height: 70%;
   }
 
   @include vars.responsive-width;
@@ -71,38 +72,4 @@ footer {
   }
 
   @include vars.responsive-width;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 600px;
-  margin: 2rem auto;
-
-  input,
-  textarea {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid vars.$clouds-dark;
-    border-radius: 5px;
-  }
-
-  div {
-    align-self: center;
-  }
-
-  button {
-    padding: 0.75rem;
-    font-size: 1rem;
-    background-color: vars.$clouds-medium;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: vars.$clouds-dark;
-    }
-  }
 }

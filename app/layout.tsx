@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import '@styles/globals.scss';
+import '@src/styles/globals.scss';
 import Footer from '@src/components/footer';
 import Header from '@src/components/header';
 import Script from 'next/script';
-import { CLOUD_FLARE_TURNSTILE } from '../src/constants';
+import { CLOUD_FLARE_TURNSTILE } from '@src/constants';
 
 export const metadata: Metadata = {
   title: 'lucianod.me',
