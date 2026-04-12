@@ -152,12 +152,21 @@ export function isIconName(name: string): name is IconName {
   ].includes(name);
 }
 
-function Icon({ name, containerClassName, imageClassName }: IconProps): JSX.Element {
+function Icon({
+  name,
+  containerClassName,
+  imageClassName,
+}: IconProps): JSX.Element {
   if (!isIconName(name)) throw new Error(`Invalid icon name: ${name}`);
 
   return (
     <Link className={containerClassName} href={getLink(name)}>
-      <Image className={imageClassName} fill alt={getAlt(name)} src={getSrc(name)} />
+      <Image
+        className={imageClassName}
+        fill
+        alt={getAlt(name)}
+        src={getSrc(name)}
+      />
     </Link>
   );
 }

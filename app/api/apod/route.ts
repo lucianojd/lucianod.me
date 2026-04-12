@@ -3,18 +3,22 @@ import { RedisService } from '@src/redis';
 import { createKey } from '@src/apod';
 import { NASA } from '@src/constants';
 import type { NasaMedia } from '@src/types/apod';
+import { getDateRange } from '@src/utils';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const offset = parseInt(searchParams.get('offset') || '0', 10);
   const count = parseInt(searchParams.get('count') || '1', 10);
 
+  // Limit response to 10 results.
   if (count > 10) {
     return new Response(JSON.stringify({ message: 'Count cannot exceed 10' }), {
       headers: { 'Content-Type': 'application/json' },
       status: 400,
     });
   }
+
+  const dates = getDateRange(offset, count);
 
   try {
     const redis = await RedisService.getInstance();

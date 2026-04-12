@@ -3,6 +3,7 @@
 section.apod {
   position: relative;
   display: flex;
+  padding: 10px;
 
   .blurb-url {
     color: vars.$clouds-light;
@@ -31,12 +32,10 @@ section.apod {
 
     @include vars.desktop {
       width: 50%;
-      margin-left: 10px;
     }
 
     @include vars.tablet {
       width: 50%;
-      margin-left: 10px;
     }
   }
 

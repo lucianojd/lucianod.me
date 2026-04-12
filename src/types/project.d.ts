@@ -7,4 +7,4 @@ export interface Project {
   repo: string;
   tags: string[];
   icons: IconName[];
-};
+}

@@ -7,4 +7,4 @@ export interface CloudFlareVerificationResponse {
     interactive: boolean;
   };
   success: boolean;
-};
+}

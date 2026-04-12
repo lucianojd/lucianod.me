@@ -1,13 +1,16 @@
 'use client';
 
 import { useActionState } from 'react';
-import { submitContactForm } from './page';
+import { submitContactForm } from '../../app/contact/page';
 import Form from 'next/form';
 import dynamic from 'next/dynamic';
 
-const Turnstile = dynamic(() => import('@src/components/cloudflare-turnstile'), {
-  ssr: false,
-});
+const Turnstile = dynamic(
+  () => import('@src/components/cloudflare-turnstile'),
+  {
+    ssr: false,
+  },
+);
 
 export default function ContactForm() {
   const [formState, formAction, isPending] = useActionState(

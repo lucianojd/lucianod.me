@@ -22,7 +22,7 @@
       "position": "Full Stack Developer",
       "location": "New Westminster, B.C.",
       "startDate": "2023-10-23",
-      "endDate": "Present",
+      "endDate": "",
       "experience": [
         "Developed a scalable routine with JavaScript for parsing ServiceNow case records into a PDF file",
         "Collaborated with multiple parties to create an integration for ServiceNow and Jira",

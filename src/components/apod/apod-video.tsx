@@ -1,4 +1,4 @@
-import { NasaVideo } from './page';
+import { NasaVideo } from '../../../app/apod/[date]/page';
 import Link from 'next/link';
 
 type ApodVideoProps = {
@@ -15,7 +15,9 @@ function ApodVideo({ media }: ApodVideoProps) {
         <h1>{media.title}</h1>
         <p>{media.explanation}</p>
         <h3>{media.date}</h3>
-        <Link className='blurb-url' href={media.url}>Video</Link>
+        <Link className="blurb-url" href={media.url}>
+          Video
+        </Link>
       </div>
     </section>
   );

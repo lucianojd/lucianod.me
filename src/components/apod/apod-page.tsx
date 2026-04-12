@@ -1,7 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { NasaMedia, NasaImage, NasaVideo } from './page';
+import type {
+  NasaMedia,
+  NasaImage,
+  NasaVideo,
+} from '../../../app/apod/[date]/page';
 import ApodImage from './apod-image';
 import ApodVideo from './apod-video';
 import Error from 'next/error';
@@ -24,20 +28,10 @@ function ApodMediaComponent({ media }: { media: NasaMedia }) {
 }
 
 export default function ApodPage({ fetchedNasaMedia }: ApodPageProps) {
-  const [today, setToday] = useState<NasaMedia | undefined>(undefined);
-
-  useEffect(() => {
-    fetchedNasaMedia.forEach((media) => {
-      media.date = new Date(media.date).toLocaleDateString();
-    });
-
-    setToday(fetchedNasaMedia[0]);
-  }, []);
-
   return (
     <section>
       <h1>Astronomy Picture of the Day</h1>
-      {today && <ApodMediaComponent media={today} />}
+      <ApodMediaComponent media={fetchedNasaMedia[0]} />
     </section>
   );
 }
