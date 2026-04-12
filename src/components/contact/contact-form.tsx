@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
-import { submitContactForm } from '../../app/contact/page';
+import { submitContactForm } from '@app/contact/page';
 import Form from 'next/form';
 import dynamic from 'next/dynamic';
 

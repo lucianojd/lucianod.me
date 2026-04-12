@@ -1,11 +1,11 @@
-import ContactForm from './contact-form';
+import ContactForm from '@src/components/contact/contact-form';
 
 function ContactPage() {
   return (
-    <main>
+    <section id='contact-form'>
       <h1>Contact</h1>
       <ContactForm />
-    </main>
+    </section>
   );
 }
 export default ContactPage;
