@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "eslint app",
     "lint:fix": "eslint app --fix",
-    "prettier": "npx prettier app styles --check",
-    "prettier:fix": "npx prettier app styles  --write"
+    "prettier": "npx prettier app src --check",
+    "prettier:fix": "npx prettier app src  --write"
   },
   "dependencies": {
     "@react-email/render": "^2.0.6",
