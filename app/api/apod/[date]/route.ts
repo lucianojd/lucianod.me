@@ -1,17 +1,17 @@
+import { validateStandardDate } from '@src/utils';
 import { NextRequest, NextResponse } from 'next/server';
-import { RedisService } from '@src/redis';
 import APODServer from '@src/apod';
-import { getDateRange } from '@src/utils';
+import { RedisService } from '@src/redis';
 
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const offset = parseInt(searchParams.get('offset') || '0', 10);
-  const count = parseInt(searchParams.get('count') || '1', 10);
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ date: string }> },
+) {
+  const date = await params.then((p) => p.date);
 
-  // Limit response to 10 results.
-  if (count > 10) {
+  if (typeof date !== 'string' || !validateStandardDate(date)) {
     return NextResponse.json(
-      { message: 'Count cannot exceed 10' },
+      { message: 'Invalid date format. Expected YYYY-MM-DD' },
       {
         headers: { 'Content-Type': 'application/json' },
         status: 400,
@@ -19,11 +19,9 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const dates = getDateRange(offset, count);
-
   try {
     const apodServer = await APODServer.getInstance(new RedisService());
-    const data = await apodServer.getAPOD(dates[0]);
+    const data = await apodServer.getAPOD(date);
 
     return NextResponse.json(data, {
       headers: { 'Content-Type': 'application/json' },
@@ -38,4 +36,6 @@ export async function GET(request: NextRequest) {
       },
     );
   }
+
+  return NextResponse.json({ date });
 }

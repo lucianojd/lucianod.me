@@ -6,8 +6,6 @@ interface WorkExperienceProps {
   workExperience: WorkExperience[];
 }
 
-interface PositionProps extends WorkExperience {}
-
 const LocalDate = dynamic(() => import('@src/components/local-date'), {
   ssr: false,
 });
@@ -19,7 +17,7 @@ function Position({
   startDate,
   endDate,
   experience,
-}: PositionProps) {
+}: WorkExperience) {
   return (
     <div>
       <h2>

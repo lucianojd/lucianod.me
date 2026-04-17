@@ -4,6 +4,7 @@ import Footer from '@src/components/footer';
 import Header from '@src/components/header';
 import Script from 'next/script';
 import { CLOUD_FLARE_TURNSTILE } from '@src/constants';
+import QueryClientProviderWrapper from '@src/components/query-client-provider';
 
 export const metadata: Metadata = {
   title: 'lucianod.me',
@@ -32,9 +33,11 @@ export default function RootLayout({
         <Script async defer src={CLOUD_FLARE_TURNSTILE.WIDGET_URL} />
       </head>
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <QueryClientProviderWrapper>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </QueryClientProviderWrapper>
       </body>
     </html>
   );

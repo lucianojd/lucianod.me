@@ -1,19 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import type {
-  NasaMedia,
-  NasaImage,
-  NasaVideo,
-} from '../../../app/apod/[date]/page';
+import { NasaMedia, NasaImage, NasaVideo } from '@src/types/apod';
 import ApodImage from './apod-image';
 import ApodVideo from './apod-video';
 import Error from 'next/error';
-
-type MediaList = NasaMedia[];
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 type ApodPageProps = {
-  fetchedNasaMedia: MediaList;
+  date: string;
 };
 
 function ApodMediaComponent({ media }: { media: NasaMedia }) {
@@ -27,11 +22,24 @@ function ApodMediaComponent({ media }: { media: NasaMedia }) {
   }
 }
 
-export default function ApodPage({ fetchedNasaMedia }: ApodPageProps) {
+export default function ApodPage({ date }: ApodPageProps) {
+  const { data, isLoading, isError } = useQuery<NasaMedia>({
+    queryKey: ['apod', date],
+    queryFn: async () => {
+      const data = await axios
+        .get<NasaMedia>(`/api/apod/${date}`)
+        .then((res) => res.data);
+      console.log('Fetched APOD data:', data);
+      return data;
+    },
+  });
+
   return (
     <section>
       <h1>Astronomy Picture of the Day</h1>
-      <ApodMediaComponent media={fetchedNasaMedia[0]} />
+      {isLoading && <p>Loading...</p>}
+      {data && <ApodMediaComponent media={data} />}
+      {isError && <p>Error loading data.</p>}
     </section>
   );
 }

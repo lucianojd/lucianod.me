@@ -1,4 +1,4 @@
-import { NasaVideo } from '../../../app/apod/[date]/page';
+import { NasaVideo } from '@src/types/apod';
 import Link from 'next/link';
 
 type ApodVideoProps = {

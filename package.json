@@ -6,13 +6,14 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint app",
-    "lint:fix": "eslint app --fix",
+    "lint": "eslint app src",
+    "lint:fix": "eslint app src --fix",
     "prettier": "npx prettier app src --check",
     "prettier:fix": "npx prettier app src  --write"
   },
   "dependencies": {
     "@react-email/render": "^2.0.6",
+    "@tanstack/react-query": "^5.99.0",
     "axios": "^1.15.0",
     "next": "^16.2.3",
     "nodemailer": "^8.0.5",

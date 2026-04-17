@@ -1,6 +1,6 @@
 'use client';
 
-import { NasaImage } from '@app/apod/[date]/page';
+import { NasaImage } from '@src/types/apod';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';

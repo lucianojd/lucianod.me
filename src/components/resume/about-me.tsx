@@ -1,8 +1,6 @@
 import type { AboutMe } from '@src/types/resume';
 
-export interface AboutMeProps extends AboutMe {}
-
-export default function AboutMe({ description }: AboutMeProps) {
+export default function AboutMe({ description }: AboutMe) {
   return (
     <section id="about-me">
       <h1>About me</h1>

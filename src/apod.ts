@@ -1,42 +1,78 @@
-import { RedisService } from '@src/redis';
+import { Cache } from '@src/interfaces/cache.interface';
 import axios from 'axios';
 import { NASA } from '@src/constants';
 import { NasaMedia } from './types/apod';
 import { getStandardFromDate, validateStandardDate } from './utils';
 
-export function createKey(date: string | Date): string {
-  if (typeof date === 'string') {
-    if (!validateStandardDate(date))
-      throw new Error('Invalid date format. Expected YYYY-MM-DD');
+let instance: APODServer | null = null;
 
-    return `apod:${date}`;
-  } else {
-    return `apod:${getStandardFromDate(date)}`;
+export default class APODServer {
+  private cache: Cache;
+  private constructor(cache: Cache) {
+    this.cache = cache;
   }
-}
 
-export function compareKeys(key1: string, key2: string): boolean {
-  return key1 === key2;
-}
+  static async getInstance(cache: Cache): Promise<APODServer> {
+    if (!instance) {
+      instance = new APODServer(cache);
+      await instance.connect(cache);
+    }
+    return instance;
+  }
 
-export class APODServer {
-  static async getAPOD(date: string | Date): Promise<NasaMedia> {
-    const redis = await RedisService.getInstance();
-    const key = createKey(date);
-    const cached = await redis.get<string>(key);
+  async connect(cache: Cache) {
+    if (!this.cache) {
+      this.cache = cache;
+    }
+
+    if (!this.cache.isConnected()) {
+      await this.cache.connect();
+    }
+  }
+
+  isConnected(): boolean {
+    if (!this.cache) return false;
+    return this.cache.isConnected();
+  }
+
+  createKey(date: string | Date): string {
+    if (typeof date === 'string') {
+      if (!validateStandardDate(date))
+        throw new Error('Invalid date format. Expected YYYY-MM-DD');
+
+      return `apod:${date}`;
+    } else {
+      return `apod:${getStandardFromDate(date)}`;
+    }
+  }
+
+  compareKeys(key1: string, key2: string): boolean {
+    return key1 === key2;
+  }
+
+  async getAPOD(date: string | Date): Promise<NasaMedia> {
+    // Verify cache is connected.
+    if (!this.cache)
+      throw new Error('Cache not initialized. Call connect() first.');
+
+    const key = this.createKey(date);
+    const cached = await this.cache.get<string>(key);
 
     if (cached) {
-      return JSON.parse(cached);
+      this.cache.refresh(key);
+      return JSON.parse(cached) as NasaMedia;
     } else {
-      const result = await axios.get(NASA.API_URL, {
-        params: {
-          api_key: NASA.API_KEY,
-          date: date,
-        },
-      });
+      const data = await axios
+        .get<NasaMedia>(NASA.API_URL, {
+          params: {
+            api_key: NASA.API_KEY,
+            date: date,
+          },
+        })
+        .then((res) => res.data);
 
-      const nasaMedia: NasaMedia = result.data as NasaMedia;
-      await redis.set(key, JSON.stringify(nasaMedia), 24 * 60 * 60);
+      const nasaMedia: NasaMedia = data as NasaMedia;
+      await this.cache.set(key, JSON.stringify(nasaMedia));
       return nasaMedia;
     }
   }
