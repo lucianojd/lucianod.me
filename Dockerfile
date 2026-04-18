@@ -11,8 +11,8 @@ COPY . .
 
 ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAACFiGNWG2Rq3LqGG
 
-RUN pnpm install --frozen-lockfile
-RUN pnpm build
+RUN pnpm install --frozen-lockfile && pnpm build && pnpm prune --production
+RUN chown -R node:node .
 
 # Production image
 FROM node:24-alpine AS runner
