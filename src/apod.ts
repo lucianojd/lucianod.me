@@ -2,29 +2,32 @@ import { Cache } from '@src/interfaces/cache.interface';
 import axios from 'axios';
 import { NASA } from '@src/constants';
 import { NasaMedia } from './types/apod';
-import { getStandardFromDate, validateStandardDate } from './utils';
+import {
+  getDateRange,
+  getStandardFromDate,
+  validateStandardDate,
+} from './utils';
+import { Server } from './interfaces/server.interface';
 
 let instance: APODServer | null = null;
 
-export default class APODServer {
-  private cache: Cache;
-  private constructor(cache: Cache) {
-    this.cache = cache;
-  }
-
-  static async getInstance(cache: Cache): Promise<APODServer> {
+export class APODServerFactory {
+  static async create(cache: Cache): Promise<APODServer> {
     if (!instance) {
       instance = new APODServer(cache);
-      await instance.connect(cache);
+      await instance.connect();
     }
     return instance;
   }
+}
 
-  async connect(cache: Cache) {
-    if (!this.cache) {
-      this.cache = cache;
-    }
+export class APODServer implements Server {
+  private cache: Cache;
+  public constructor(cache: Cache) {
+    this.cache = cache;
+  }
 
+  async connect() {
     if (!this.cache.isConnected()) {
       await this.cache.connect();
     }
@@ -77,7 +80,67 @@ export default class APODServer {
     }
   }
 
-  static async getAPODRange(offset: number, count: number): Promise<string[]> {
-    return [];
+  private retriveFromCache = async (
+    date: string,
+  ): Promise<NasaMedia | null> => {
+    const key = this.createKey(date);
+    return this.cache.get<string>(key).then((cached) => {
+      if (cached) {
+        this.cache.refresh(key);
+        return JSON.parse(cached) as NasaMedia;
+      }
+      return null;
+    });
+  };
+
+  async getAPODRange(
+    offset: number,
+    count: number,
+  ): Promise<NasaMedia[] | null> {
+    const dates = getDateRange(offset, count);
+    console.log({
+      offset,
+      count,
+      dates,
+    });
+
+    const startDate = dates[dates.length - 1];
+    const endDate = dates[0];
+
+    let data: NasaMedia[] | undefined = await Promise.all(
+      dates.map((date) => this.retriveFromCache(date)),
+    ).then((cachedData) => {
+      const missingDates = dates.filter(
+        (_, index) => cachedData[index] === null,
+      );
+      console.log({ missingDates });
+      if (missingDates.length === 0) {
+        return cachedData as NasaMedia[];
+      }
+      return undefined;
+    });
+
+    data ??= await axios
+      .get<NasaMedia[]>(NASA.API_URL, {
+        params: {
+          api_key: NASA.API_KEY,
+          start_date: startDate,
+          end_date: endDate,
+        },
+      })
+      .then((res) => {
+        const responseData = res.data as NasaMedia[];
+
+        console.log({ responseData });
+
+        for (const media of responseData) {
+          const key = this.createKey(media.date);
+          this.cache.set(key, JSON.stringify(media));
+        }
+
+        return responseData;
+      });
+
+    return data ?? null;
   }
 }

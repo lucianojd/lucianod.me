@@ -51,11 +51,7 @@ export class RedisService implements Cache {
   public async get<E>(key: string | number): Promise<E | null> {
     const value = await this.client.get(String(key));
 
-    if (value) {
-      console.info(`redis-service: cache hit for key: ${key}`);
-      const parsedValue = JSON.parse(value) as E;
-      return parsedValue;
-    }
+    if (value) return JSON.parse(value) as E;
 
     return null;
   }
@@ -65,9 +61,6 @@ export class RedisService implements Cache {
     value: E,
     ttl: number = DEFAULT_TTL_SECONDS,
   ) {
-    console.info(
-      `redis-service: setting cache for key: ${key} with ttl: ${ttl}`,
-    );
     await this.client.set(String(key), JSON.stringify(value), {
       EX: ttl, // Set expiration time in seconds if provided
     });
@@ -77,7 +70,6 @@ export class RedisService implements Cache {
     key: string | number,
     ttl: number = DEFAULT_TTL_SECONDS,
   ) {
-    console.info(`redis-service: refreshing cache for key: ${key}`);
-    await this.client.touch(String(key)); // Refresh TTL to 60 seconds
+    await this.client.expire(String(key), ttl); // Refresh TTL to the specified value
   }
 }

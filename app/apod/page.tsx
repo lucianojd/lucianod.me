@@ -1,5 +1,5 @@
-import APODRedirect from '@src/components/apod/redirect';
+import ApodBrowser from '@src/components/apod/apod-browser';
 
 export default async function Page() {
-  return <APODRedirect />;
+  return <ApodBrowser />;
 }

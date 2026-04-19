@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { RedisService } from '@src/redis';
-import APODServer from '@src/apod';
-import { getDateRange } from '@src/utils';
+import { APODServerFactory } from '@src/apod';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -19,17 +18,15 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const dates = getDateRange(offset, count);
-
   try {
-    const apodServer = await APODServer.getInstance(new RedisService());
-    const data = await apodServer.getAPOD(dates[0]);
+    const apodServer = await APODServerFactory.create(new RedisService());
+    const data = await apodServer.getAPODRange(offset, count);
 
     return NextResponse.json(data, {
       headers: { 'Content-Type': 'application/json' },
       status: 200,
     });
-  } catch (e) {
+  } catch (_) {
     return NextResponse.json(
       { message: 'Internal server error' },
       {

@@ -2,11 +2,13 @@ import { JSX } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { IconName } from '@src/types/icon';
+import type { ImageProps } from 'next/image';
 
 type IconProps = {
   name: IconName;
   containerClassName?: string;
   imageClassName?: string;
+  loading?: ImageProps['loading'];
 };
 
 function getSrc(name: IconName): string {
@@ -156,6 +158,7 @@ function Icon({
   name,
   containerClassName,
   imageClassName,
+  loading = 'lazy',
 }: IconProps): JSX.Element {
   if (!isIconName(name)) throw new Error(`Invalid icon name: ${name}`);
 
@@ -164,6 +167,7 @@ function Icon({
       <Image
         className={imageClassName}
         fill
+        loading={loading}
         alt={getAlt(name)}
         src={getSrc(name)}
       />

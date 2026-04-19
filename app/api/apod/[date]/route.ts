@@ -1,6 +1,6 @@
 import { validateStandardDate } from '@src/utils';
 import { NextRequest, NextResponse } from 'next/server';
-import APODServer from '@src/apod';
+import { APODServerFactory } from '@src/apod';
 import { RedisService } from '@src/redis';
 
 export async function GET(
@@ -20,14 +20,14 @@ export async function GET(
   }
 
   try {
-    const apodServer = await APODServer.getInstance(new RedisService());
+    const apodServer = await APODServerFactory.create(new RedisService());
     const data = await apodServer.getAPOD(date);
 
     return NextResponse.json(data, {
       headers: { 'Content-Type': 'application/json' },
       status: 200,
     });
-  } catch (e) {
+  } catch (_) {
     return NextResponse.json(
       { message: 'Internal server error' },
       {
@@ -36,6 +36,4 @@ export async function GET(
       },
     );
   }
-
-  return NextResponse.json({ date });
 }

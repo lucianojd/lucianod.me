@@ -48,7 +48,7 @@ export async function submitContactForm(
       return { success: false, message: 'Turnstile verification failed.' };
     }
     // TODO define and use error parameter.
-  } catch (e) {
+  } catch (_) {
     return {
       success: false,
       message: 'Something went wrong sending an email.',

@@ -1,5 +1,4 @@
 import { JSX } from 'react';
-import Icon from '@src/components/icon';
 import Link from 'next/link';
 
 function Footer(): JSX.Element {
