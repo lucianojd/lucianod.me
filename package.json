@@ -14,7 +14,7 @@
   "dependencies": {
     "@react-email/render": "^2.0.6",
     "@tanstack/react-query": "^5.99.0",
-    "axios": "^1.15.0",
+    "axios": "^1.16.0",
     "next": "^16.2.3",
     "nodemailer": "^8.0.5",
     "react": "^19.2.5",
