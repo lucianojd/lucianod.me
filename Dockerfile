@@ -7,7 +7,6 @@ RUN npm install -g pnpm
 # Build image
 FROM base AS builder
 WORKDIR /app
-RUN mkdir -p /app/data
 COPY . .
 
 ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAACFiGNWG2Rq3LqGG
@@ -20,6 +19,7 @@ FROM node:26-slim AS runner
 
 USER node
 WORKDIR /app
+RUN mkdir -p /app/data
 
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
