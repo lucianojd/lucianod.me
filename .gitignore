@@ -43,3 +43,6 @@ secrets/
 *.key
 *.crt
 *.csr
+
+# Local data
+data

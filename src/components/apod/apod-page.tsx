@@ -1,8 +1,8 @@
 'use client';
 
 import { NasaMedia, NasaImage, NasaVideo } from '@src/types/apod';
-import ApodImage from './apod-image';
-import ApodVideo from './apod-video';
+import ApodImage from '@src/components/apod/apod-image';
+import ApodVideo from '@src/components/apod/apod-video';
 import Error from 'next/error';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -29,7 +29,6 @@ export default function ApodPage({ date }: ApodPageProps) {
       const data = await axios
         .get<NasaMedia>(`/api/apod/${date}`)
         .then((res) => res.data);
-      console.log('Fetched APOD data:', data);
       return data;
     },
   });

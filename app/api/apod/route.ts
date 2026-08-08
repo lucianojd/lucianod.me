@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { RedisService } from '@src/redis';
 import { APODServerFactory } from '@src/apod';
 
 export async function GET(request: NextRequest) {
@@ -8,7 +7,7 @@ export async function GET(request: NextRequest) {
   const count = parseInt(searchParams.get('count') || '1', 10);
 
   // Limit response to 10 results.
-  if (count > 10) {
+  if (count > 1000) {
     return NextResponse.json(
       { message: 'Count cannot exceed 10' },
       {
@@ -19,7 +18,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const apodServer = await APODServerFactory.create(new RedisService());
+    const apodServer = await APODServerFactory.create();
     const data = await apodServer.getAPODRange(offset, count);
 
     return NextResponse.json(data, {

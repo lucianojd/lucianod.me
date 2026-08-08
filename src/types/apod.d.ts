@@ -1,3 +1,11 @@
+export interface APODModel {
+  date: string;
+  type: MediaType;
+  object: string;
+}
+
+export type MediaType = 'image' | 'video' | 'other';
+
 export interface NasaMedia {
   date: string;
   explanation: string;

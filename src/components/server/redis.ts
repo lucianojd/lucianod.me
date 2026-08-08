@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { RedisClientType, createClient } from 'redis';
 
 export class RedisService {

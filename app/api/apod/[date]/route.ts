@@ -1,7 +1,6 @@
 import { validateStandardDate } from '@src/utils';
 import { NextRequest, NextResponse } from 'next/server';
 import { APODServerFactory } from '@src/apod';
-import { RedisService } from '@src/redis';
 
 export async function GET(
   req: NextRequest,
@@ -20,7 +19,7 @@ export async function GET(
   }
 
   try {
-    const apodServer = await APODServerFactory.create(new RedisService());
+    const apodServer = await APODServerFactory.create();
     const data = await apodServer.getAPOD(date);
 
     return NextResponse.json(data, {

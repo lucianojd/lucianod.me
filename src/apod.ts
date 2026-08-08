@@ -1,146 +1,231 @@
-import { Cache } from '@src/interfaces/cache.interface';
 import axios from 'axios';
 import { NASA } from '@src/constants';
-import { NasaMedia } from './types/apod';
-import {
-  getDateRange,
-  getStandardFromDate,
-  validateStandardDate,
-} from './utils';
-import { Server } from './interfaces/server.interface';
+import { NasaMedia, APODModel } from '@src/types/apod';
+import { getDateRange, getStandardFromDate } from '@src/utils';
+import SqliteGlobal, { SqliteGlobalError } from '@src/sqlite';
 
 let instance: APODServer | null = null;
 
 export class APODServerFactory {
-  static async create(cache: Cache): Promise<APODServer> {
+  static async create(): Promise<APODServer> {
     if (!instance) {
-      instance = new APODServer(cache);
-      await instance.connect();
+      instance = new APODServer();
     }
     return instance;
   }
 }
 
-export class APODServer implements Server {
-  private cache: Cache;
-  public constructor(cache: Cache) {
-    this.cache = cache;
+export class APODServerError extends Error {
+  constructor(
+    message: string,
+    public readonly originalError?: Error,
+  ) {
+    super(`APODServer: ${message}`);
+    this.name = 'APODServerError';
   }
+}
 
-  async connect() {
-    if (!this.cache.isConnected()) {
-      await this.cache.connect();
-    }
-  }
+export class APODServer {
+  private db: SqliteGlobal | undefined = undefined;
 
-  isConnected(): boolean {
-    if (!this.cache) return false;
-    return this.cache.isConnected();
-  }
-
-  createKey(date: string | Date): string {
-    if (typeof date === 'string') {
-      if (!validateStandardDate(date))
-        throw new Error('Invalid date format. Expected YYYY-MM-DD');
-
-      return `apod:${date}`;
-    } else {
-      return `apod:${getStandardFromDate(date)}`;
-    }
-  }
-
-  compareKeys(key1: string, key2: string): boolean {
-    return key1 === key2;
-  }
-
-  async getAPOD(date: string | Date): Promise<NasaMedia> {
-    // Verify cache is connected.
-    if (!this.cache)
-      throw new Error('Cache not initialized. Call connect() first.');
-
-    const key = this.createKey(date);
-    const cached = await this.cache.get<string>(key);
-
-    if (cached) {
-      this.cache.refresh(key);
-      return JSON.parse(cached) as NasaMedia;
-    } else {
-      const data = await axios
-        .get<NasaMedia>(NASA.API_URL, {
-          params: {
-            api_key: NASA.API_KEY,
-            date: date,
-          },
-        })
-        .then((res) => res.data);
-
-      const nasaMedia: NasaMedia = data as NasaMedia;
-      await this.cache.set(key, JSON.stringify(nasaMedia));
-      return nasaMedia;
-    }
-  }
-
-  private retriveFromCache = async (
-    date: string,
-  ): Promise<NasaMedia | null> => {
-    const key = this.createKey(date);
-    return this.cache.get<string>(key).then((cached) => {
-      if (cached) {
-        this.cache.refresh(key);
-        return JSON.parse(cached) as NasaMedia;
+  public constructor() {
+    if (this.db == undefined) {
+      try {
+        this.db = new SqliteGlobal();
+      } catch (err: SqliteGlobalError | Error | unknown) {
+        if (err instanceof SqliteGlobalError) {
+          throw new APODServerError(`APODServer: ${err.message}`, err);
+        } else if (err instanceof Error) {
+          throw new APODServerError(`APODServer: ${err.message}`, err);
+        } else {
+          throw new APODServerError(
+            'APODServer: Unknown error occurred during database connection',
+            undefined,
+          );
+        }
       }
-      return null;
+    }
+  }
+
+  async getAPOD(date: string | Date) {
+    return new Promise<NasaMedia | undefined>((resolve, reject) => {
+      const db = this.db?.getInstance();
+
+      if (db) {
+        db.get<APODModel>(
+          `SELECT * FROM apod WHERE id = ?`,
+          [getStandardFromDate(date)],
+          async (err, row) => {
+            if (err) {
+              return reject(
+                new APODServerError('failed to query database apod: ', err),
+              );
+            }
+
+            const dbRow: NasaMedia | undefined = row
+              ? JSON.parse(row.object)
+              : undefined;
+
+            if (dbRow) {
+              return resolve(dbRow);
+            } else {
+              const params = {
+                api_key: NASA.API_KEY,
+                date: date,
+              };
+
+              const response = await axios.get(NASA.API_URL, { params });
+              let nasaMedia: NasaMedia | undefined = undefined;
+
+              switch (response.status) {
+                case 200:
+                  nasaMedia = response.data as NasaMedia;
+                  db.run(
+                    `INSERT INTO apod (id, type, object) VALUES (?, ?, ?)`,
+                    [
+                      nasaMedia.date,
+                      nasaMedia.media_type,
+                      JSON.stringify(nasaMedia),
+                    ],
+                    (err) => {
+                      if (err) {
+                        return reject(
+                          new APODServerError(
+                            'failed to insert data into database apod: ',
+                            err,
+                          ),
+                        );
+                      } else {
+                        return resolve(nasaMedia);
+                      }
+                    },
+                  );
+                  break;
+                case 400:
+                  return reject(
+                    new APODServerError(
+                      `invalid request to NASA API: ${response.status} ${response.statusText}`,
+                    ),
+                  );
+                case 404:
+                  return reject(
+                    new APODServerError(
+                      `data not found in NASA API: ${response.status} ${response.statusText}`,
+                    ),
+                  );
+                default:
+                  return reject(
+                    new APODServerError(
+                      `failed to fetch data from NASA API: ${response.status} ${response.statusText}`,
+                    ),
+                  );
+              }
+            }
+          },
+        );
+      } else {
+        return reject(
+          new APODServerError('Database instance is not initialized.'),
+        );
+      }
     });
-  };
+  }
 
   async getAPODRange(
     offset: number,
     count: number,
-  ): Promise<NasaMedia[] | null> {
-    const dates = getDateRange(offset, count);
-    console.log({
-      offset,
-      count,
-      dates,
-    });
+  ): Promise<NasaMedia[] | undefined> {
+    return new Promise<NasaMedia[] | undefined>((resolve, reject) => {
+      const dates = getDateRange(offset, count);
 
-    const startDate = dates[dates.length - 1];
-    const endDate = dates[0];
-
-    let data: NasaMedia[] | undefined = await Promise.all(
-      dates.map((date) => this.retriveFromCache(date)),
-    ).then((cachedData) => {
-      const missingDates = dates.filter(
-        (_, index) => cachedData[index] === null,
-      );
-      console.log({ missingDates });
-      if (missingDates.length === 0) {
-        return cachedData as NasaMedia[];
+      if (dates.length === 0) {
+        return resolve([]);
       }
-      return undefined;
+
+      const db = this.db?.getInstance();
+
+      if (db) {
+        const placeholders = dates.map(() => '?').join(',');
+        const sql = `SELECT * FROM apod WHERE id IN (${placeholders})`;
+        const params = dates;
+
+        db.all<APODModel>(sql, params, async (err, rows) => {
+          if (err) {
+            return reject(
+              new APODServerError('failed to query database apod: ', err),
+            );
+          }
+
+          const dbRows: NasaMedia[] = rows.map((row) => JSON.parse(row.object));
+
+          if (dbRows.length === dates.length) {
+            return resolve(dbRows);
+          } else {
+            const startDate = dates[dates.length - 1];
+            const endDate = dates[0];
+
+            const response = await axios.get<NasaMedia[]>(NASA.API_URL, {
+              params: {
+                api_key: NASA.API_KEY,
+                start_date: startDate,
+                end_date: endDate,
+              },
+            });
+
+            const nasaMedia: NasaMedia[] | undefined = response.data as
+              NasaMedia[] | undefined;
+            const placeholders = dates.map(() => '(?, ?, ?)').join(',');
+            const sql = `INSERT OR REPLACE INTO apod (id, type, object) VALUES ${placeholders}`;
+            const params =
+              nasaMedia
+                ?.map((item) => [
+                  item.date,
+                  item.media_type,
+                  JSON.stringify(item),
+                ])
+                .flat() ?? [];
+
+            switch (response.status) {
+              case 200:
+                db.run(sql, params, (err) => {
+                  if (err) {
+                    return reject(
+                      new APODServerError(
+                        'failed to insert data into database apod: ',
+                        err,
+                      ),
+                    );
+                  } else {
+                    return resolve(nasaMedia);
+                  }
+                });
+                break;
+              case 400:
+                return reject(
+                  new APODServerError(
+                    `invalid request to NASA API: ${response.status} ${response.statusText}`,
+                  ),
+                );
+              case 404:
+                return reject(
+                  new APODServerError(
+                    `data not found in NASA API: ${response.status} ${response.statusText}`,
+                  ),
+                );
+              default:
+                return reject(
+                  new APODServerError(
+                    `failed to fetch data from NASA API: ${response.status} ${response.statusText}`,
+                  ),
+                );
+            }
+          }
+        });
+      } else {
+        return reject(
+          new APODServerError('Database instance is not initialized.'),
+        );
+      }
     });
-
-    data ??= await axios
-      .get<NasaMedia[]>(NASA.API_URL, {
-        params: {
-          api_key: NASA.API_KEY,
-          start_date: startDate,
-          end_date: endDate,
-        },
-      })
-      .then((res) => {
-        const responseData = res.data as NasaMedia[];
-
-        console.log({ responseData });
-
-        for (const media of responseData) {
-          const key = this.createKey(media.date);
-          this.cache.set(key, JSON.stringify(media));
-        }
-
-        return responseData;
-      });
-
-    return data ?? null;
   }
 }

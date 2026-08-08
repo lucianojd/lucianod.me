@@ -2,6 +2,7 @@
 @use '@src/styles/variables.module.scss' as vars;
 @use '@src/styles/components/project.module.scss' as project;
 @use '@src/styles/components/apod.module.scss' as apod;
+@use '@src/styles/components/apod-browser.module.scss' as apod-browser;
 
 $font-family:
   -apple-system,
@@ -75,4 +76,25 @@ footer {
   }
 
   @include vars.responsive-width;
+}
+
+button {
+  background-color: vars.$clouds-medium;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    color: vars.$clouds-darkest;
+    background-color: vars.$clouds-light;
+  }
+
+  &:disabled {
+    background-color: vars.$clouds-dark;
+    color: vars.$clouds-medium;
+    cursor: not-allowed;
+  }
 }

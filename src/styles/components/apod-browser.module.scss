@@ -1,0 +1,65 @@
+@use '@src/styles/variables.module.scss' as vars;
+
+section.apod-browser {
+  position: relative;
+
+  section.apod-browser-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    select {
+      background-color: vars.$clouds-medium;
+      color: white;
+      padding: 5px;
+      margin: 0 5px;
+      border-radius: 5px;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 5px vars.$clouds;
+      }
+    }
+  }
+
+  section.apod-browser-list {
+    ul {
+      list-style-type: none;
+      gap: 10px;
+      margin: 10px;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+
+      li {
+        background-color: vars.$clouds-dark;
+        padding: 10px;
+        border-radius: 5px;
+
+        a {
+          color: white;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  section.apod-browser-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 20px 0;
+
+    label {
+      margin: 0 10px;
+      font-size: 1.2rem;
+      color: white;
+    }
+  }
+}
