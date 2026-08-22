@@ -26,12 +26,30 @@ body {
   color: white;
 }
 
-h1,
-h2,
-h3,
-p {
-  margin: 20px;
+h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  line-height: normal;
 }
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.75rem;
+}
+h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 1.5rem;
+}
+p, body {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  color: #EEE;
+}
+
+h1, h2, h3 { color: #FFF; }
 
 a {
   color: white;
@@ -43,17 +61,20 @@ textarea {
 }
 
 header {
-  background-color: vars.$clouds-dark;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 15vh;
-
   .image-container {
     position: relative;
     aspect-ratio: 1/1;
-    height: 70%;
+    height: 8rem;
   }
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  box-sizing: border-box;
+  padding: 1rem;
+  background-color: vars.$clouds-dark;
+  
 
   @include vars.responsive-width;
 }
@@ -66,16 +87,20 @@ main {
 
 footer {
   background-color: vars.$clouds-dark;
-  height: 3vh;
 
+  box-sizing: border-box;
   display: flex;
   align-items: center;
 
   a {
-    margin: 0 10px;
+    margin: 1rem 1rem;
   }
 
   @include vars.responsive-width;
+}
+
+section {
+  padding: 1rem;
 }
 
 button {

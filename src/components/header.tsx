@@ -3,7 +3,7 @@ import Icon from './icon';
 
 function Header(): JSX.Element {
   return (
-    <header>
+    <header className='header'>
       <div>
         <h1>Luciano De Gianni</h1>
         <h2>Software Engineer</h2>

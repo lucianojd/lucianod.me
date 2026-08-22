@@ -14,18 +14,18 @@ export default async function Page() {
   const projects = await fetchProjects();
 
   return (
-    <section id="home-page">
+    <section id="home-page" className='homePage'>
       <h1>Welcome to the Home Page</h1>
       <p>
         To learn more about me, check out my <a href="/resume">resume</a>.
       </p>
       <h1>Projects</h1>
-      <h2>Here are some interesting projects I have built on this site:</h2>
+      <h2>On-site Projects</h2>
       <p>
         Here is a page for browsing NASA's astronomy picture of the day:{' '}
         <a href="/apod">apod</a>
       </p>
-      <h2>Here are some of my projects:</h2>
+      <h2>Projects</h2>
       <ProjectList projectList={projects} />
     </section>
   );
