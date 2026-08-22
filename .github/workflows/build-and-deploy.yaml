@@ -28,22 +28,3 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/lucianod.me:latest
           cache-from: type=gha
           cache-to: type=gha
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.JUPITER_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.JUPITER_HOST }} >> ~/.ssh/known_hosts
-
-      - name: Deploy to Jupiter
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.JUPITER_USER }}@${{ secrets.JUPITER_HOST }} \
-          "cd ~/pluto && \
-           docker image pull ${{ secrets.DOCKERHUB_USERNAME }}/lucianod.me:latest && \
-           docker compose up --force-recreate -d && \
-           docker image prune -f"
