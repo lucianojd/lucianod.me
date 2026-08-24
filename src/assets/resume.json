@@ -23,7 +23,11 @@
       "location": "Vancouver, B.C.",
       "startDate": "2024-03-23",
       "endDate": "",
-      "experience": []
+      "experience": [
+        "Used Claude AI to diagnose and repair a bug in a legacy application within an hour.",
+        "Created a new framework for rolling back OpenShift deployments in the event of a deployment failure by using a image stream named rollback, reducing rollback time and complexity.",
+        "Discerned the location of a bug in multi-program application by following the data trail and transformation through each stage of the pipeline."
+      ]
     },
     {
       "company": "Ministry of Health",
