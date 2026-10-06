@@ -19,8 +19,8 @@ export function Project({ project }: ProjectProps) {
       </Link>
       <p>{project.subtitle}</p>
       <section className="icon-list">
-        {project.icons.map((icon) => (
-          <Icon key={icon} name={icon} />
+        {project.icons.sort((a, b) => a.localeCompare(b)).map((icon) => (
+          <Icon key={icon} containerClassName="icon-project" imageContainerClassName="container-project"  name={icon} />
         ))}
       </section>
     </li>
@@ -33,7 +33,7 @@ interface ProjectListProps {
 
 export default function ProjectList({ projectList }: ProjectListProps) {
   return (
-    <ul className="project">
+    <ul className="project-list">
       {projectList.map((project) => (
         <Project key={project.name} project={project} />
       ))}

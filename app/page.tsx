@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import ProjectList from '@src/components/project/project-list';
 import type { Project } from '@src/types/project';
+import { Technologies } from '@src/components/technologies/technologies';
 
 async function fetchProjects(): Promise<Project[]> {
   const assetsDirectory = path.join(process.cwd(), 'src/assets');
@@ -20,13 +21,9 @@ export default async function Page() {
         To learn more about me, check out my <a href="/resume">resume</a>.
       </p>
       <h1>Projects</h1>
-      <h2>On-site Projects</h2>
-      <p>
-        Here is a page for browsing NASA's astronomy picture of the day:{' '}
-        <a href="/apod">apod</a>
-      </p>
-      <h2>Projects</h2>
       <ProjectList projectList={projects} />
+      <h1>Technologies</h1>
+      <Technologies/>
     </section>
   );
 }

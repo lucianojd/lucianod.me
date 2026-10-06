@@ -1,44 +1,57 @@
 @use '@src/styles/variables.module.scss' as vars;
 
-ul.project {
+ul.project-list {
   list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0px;
-  padding: 0px;
+  display: grid;
+  align-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(min(25rem, 100%), 1fr));
 
-  li {
-    p {
-      margin: auto;
-    }
+  padding: 0;
 
-    @include vars.desktop {
-      width: 40%;
-      margin: 10px;
-    }
-
-    @include vars.tablet {
-      width: 45vw;
-    }
-
-    @include vars.mobile {
-      width: 100%;
-    }
+  @include vars.desktop {
+    gap: 2rem;
   }
 
-  section.icon-list {
-    display: flex;
-    flex-wrap: wrap;
-
-    a {
-      position: relative;
-      aspect-ratio: 1/1;
-      min-height: 30px;
-      margin-right: 5px;
+  li {
+    padding: 1rem;
+    p {
+      margin: auto;
     }
   }
 
   a.project-card {
     font-size: 1.7rem;
   }
+}
+
+section.icon-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+  gap: 0.5rem;
+
+  div.container-project {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+div.container-technologies {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+
+  span.icon-label {
+    margin-top: 4px;
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+
+div.icon-technologies {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
 }

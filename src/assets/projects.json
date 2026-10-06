@@ -1,16 +1,13 @@
 [
   {
-    "name": "pluto",
-    "subtitle": "Deployment configuration for my digital ocean droplet.",
-    "repo": "https://github.com/lucianojd/pluto",
+    "name": "Team Based Care",
+    "subtitle": "A web application for healthcare providers to manage their patients and care teams. Worked as a full stack developer.",
+    "repo": "https://github.com/bcgov/MOH_TeamBasedCare",
     "icons": [
-      "nginx",
-      "docker",
-      "linux",
-      "nodejs",
-      "cloudflare",
-      "digitalocean",
-      "vscode"
+      "typescript",
+      "javascript",
+      "reactjs",
+      "nodejs"
     ]
   },
   {
@@ -28,12 +25,6 @@
       "nextjs",
       "vscode"
     ]
-  },
-  {
-    "name": "dt",
-    "subtitle": "A python application for transforming csv files. Used to assist with tracking finances.",
-    "repo": "https://github.com/lucianojd/dt",
-    "icons": ["python", "vscode"]
   },
   {
     "name": "Airble.com",

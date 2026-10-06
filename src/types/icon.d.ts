@@ -1,25 +1,3 @@
-export type IconName =
-  | 'docker'
-  | 'github'
-  | 'javascript'
-  | 'linkedin'
-  | 'nginx'
-  | 'python'
-  | 'reactjs'
-  | 'sass'
-  | 'typescript'
-  | 'nodejs'
-  | 'linux'
-  | 'nextjs'
-  | 'cloudflare'
-  | 'digitalocean'
-  | 'yarn'
-  | 'vscode'
-  | 'graphql'
-  | 'mysql'
-  | 'pm2'
-  | 'redis'
-  | 'expo'
-  | 'apple'
-  | 'android'
-  | 'earth';
+import { ICON_LIST } from '@src/constants';
+
+export type IconName = typeof ICON_LIST[number];

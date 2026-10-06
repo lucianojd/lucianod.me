@@ -15,7 +15,7 @@ importers:
         specifier: ^5.99.0
         version: 5.101.4(react@19.2.8)
       axios:
-        specifier: ^1.15.0
+        specifier: ^1.19.0
         version: 1.19.0(debug@4.4.3)
       bindings:
         specifier: ^1.5.0
@@ -26,9 +26,6 @@ importers:
       next:
         specifier: ^16.2.3
         version: 16.2.12(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.102.0)
-      nodemailer:
-        specifier: ^8.0.5
-        version: 8.0.11
       react:
         specifier: ^19.2.5
         version: 19.2.8
@@ -2510,10 +2507,6 @@ packages:
   node-releases@2.0.51:
     resolution: {integrity: sha512-wRNIrw4DmVLKQlbgOMdkMx27Wrpzes2hh5Jtbi2bjPd+4wJstWIqP5A+lscnqbm0xxmT5Bpg8Lec5ItEBwx6BQ==}
     engines: {node: '>=18'}
-
-  nodemailer@8.0.11:
-    resolution: {integrity: sha512-nrO/pDAUKl+wXX+lx16tDLbnm0fW6sK/x8mgohaCpg+CdCEl482bD4tCuAZk2DyliruiNTIZxRCoWkDqJEnAiA==}
-    engines: {node: '>=6.0.0'}
 
   nopt@9.0.0:
     resolution: {integrity: sha512-Zhq3a+yFKrYwSBluL4H9XP3m3y5uvQkB/09CwDruCiRmR/UJYnn9W4R48ry0uGC70aeTPKLynBtscP9efFFcPw==}
@@ -5736,8 +5729,6 @@ snapshots:
     optional: true
 
   node-releases@2.0.51: {}
-
-  nodemailer@8.0.11: {}
 
   nopt@9.0.0:
     dependencies:
