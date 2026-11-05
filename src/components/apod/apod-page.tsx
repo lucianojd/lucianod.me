@@ -1,6 +1,6 @@
 'use client';
 
-import { NasaMedia, NasaImage, NasaVideo } from '@src/types/apod';
+import { NasaMedia } from '@src/types/apod';
 import ApodImage from '@src/components/apod/apod-image';
 import ApodVideo from '@src/components/apod/apod-video';
 import Error from 'next/error';
@@ -14,9 +14,9 @@ type ApodPageProps = {
 function ApodMediaComponent({ media }: { media: NasaMedia }) {
   switch (media.media_type) {
     case 'image':
-      return <ApodImage media={media as NasaImage} />;
+      return <ApodImage media={media} />;
     case 'video':
-      return <ApodVideo media={media as NasaVideo} />;
+      return <ApodVideo media={media} />;
     default:
       return <Error statusCode={500} />;
   }

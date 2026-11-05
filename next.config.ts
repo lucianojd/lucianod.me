@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'www.youtube.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'science.nasa.gov'
       }
     ]
   }

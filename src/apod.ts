@@ -1,8 +1,17 @@
 import axios from 'axios';
 import { NASA } from '@src/constants';
-import { NasaMedia, APODModel } from '@src/types/apod';
-import { getDateRange, getStandardFromDate } from '@src/utils';
-import SqliteGlobal, { SqliteGlobalError } from '@src/sqlite';
+import { NasaMedia } from '@src/types/apod';
+import { getDateRange } from '@src/utils';
+import { readApod, writeApod } from '@src/firebase';
+import {
+  HTTPBadRequest,
+  HTTPInternalServerError,
+} from '@src/utils/http/error-responses';
+import {
+  HTTPNoDataFoundAtSpecifiedOffset,
+  HTTPNoDataFoundForDate,
+} from '@src/utils/http/apod-responses';
+import { NextResponse } from 'next/dist/server/web/spec-extension/response';
 
 let instance: APODServer | null = null;
 
@@ -15,119 +24,105 @@ export class APODServerFactory {
   }
 }
 
-export class APODServerError extends Error {
-  constructor(
-    message: string,
-    public readonly originalError?: Error,
-  ) {
-    super(`APODServer: ${message}`);
-    this.name = 'APODServerError';
-  }
-}
+export class APODServerError extends NextResponse {}
 
 export class APODServer {
-  private db: SqliteGlobal | undefined = undefined;
+  public constructor() {}
 
-  public constructor() {
-    if (this.db == undefined) {
-      try {
-        this.db = new SqliteGlobal();
-      } catch (err: SqliteGlobalError | Error | unknown) {
-        if (err instanceof SqliteGlobalError) {
-          throw new APODServerError(`APODServer: ${err.message}`, err);
-        } else if (err instanceof Error) {
-          throw new APODServerError(`APODServer: ${err.message}`, err);
-        } else {
-          throw new APODServerError(
-            'APODServer: Unknown error occurred during database connection',
-            undefined,
-          );
-        }
+  async getAPOD(limit: number = 25): Promise<NasaMedia[] | undefined> {
+    try {
+      const cachedData = await readApod(0, limit);
+      const today = new Date().toISOString().split('T')[0];
+
+      if (cachedData?.length === limit && cachedData[0]?.date === today) {
+        return cachedData;
       }
+    } catch {
+      // Fall back to NASA if Firebase is unavailable.
+    }
+
+    const params = {
+      api_key: NASA.API_KEY,
+    };
+
+    try {
+      const response = await axios.get(NASA.API_URL, { params });
+
+      switch (response.status) {
+        case 200:
+          writeApod(response.data as NasaMedia).catch(() => {
+            // Ignore write errors, as we still want to return the data.
+          });
+          return response.data as NasaMedia[];
+        case 400:
+          throw HTTPBadRequest({
+            message: 'Invalid request to NASA API.',
+            limit: limit,
+          });
+        case 404:
+          throw HTTPNoDataFoundAtSpecifiedOffset(0, limit);
+        default:
+          throw HTTPInternalServerError({
+            message: `Unexpected response.`,
+            limit: limit,
+          });
+      }
+    } catch (err) {
+      if (err instanceof APODServerError) {
+        throw err;
+      }
+      throw HTTPInternalServerError({
+        message: `Unexpected error occurred.`,
+        limit: limit,
+      });
     }
   }
 
-  async getAPOD(date: string | Date) {
+  async getAPODByDate(date: string | Date) {
     return new Promise<NasaMedia | undefined>((resolve, reject) => {
-      const db = this.db?.getInstance();
+      const params = {
+        api_key: NASA.API_KEY,
+        date: date,
+      };
 
-      if (db) {
-        db.get<APODModel>(
-          `SELECT * FROM apod WHERE id = ?`,
-          [getStandardFromDate(date)],
-          async (err, row) => {
-            if (err) {
+      axios
+        .get(NASA.API_URL, { params })
+        .then((response) => {
+          switch (response.status) {
+            case 200:
+              return resolve(response.data as NasaMedia);
+            case 400:
               return reject(
-                new APODServerError('failed to query database apod: ', err),
+                HTTPBadRequest({
+                  message: `Invalid request for date: ${date}`,
+                  date: date,
+                }),
               );
-            }
-
-            const dbRow: NasaMedia | undefined = row
-              ? JSON.parse(row.object)
-              : undefined;
-
-            if (dbRow) {
-              return resolve(dbRow);
-            } else {
-              const params = {
-                api_key: NASA.API_KEY,
-                date: date,
-              };
-
-              const response = await axios.get(NASA.API_URL, { params });
-              let nasaMedia: NasaMedia | undefined = undefined;
-
-              switch (response.status) {
-                case 200:
-                  nasaMedia = response.data as NasaMedia;
-                  db.run(
-                    `INSERT INTO apod (id, type, object) VALUES (?, ?, ?)`,
-                    [
-                      nasaMedia.date,
-                      nasaMedia.media_type,
-                      JSON.stringify(nasaMedia),
-                    ],
-                    (err) => {
-                      if (err) {
-                        return reject(
-                          new APODServerError(
-                            'failed to insert data into database apod: ',
-                            err,
-                          ),
-                        );
-                      } else {
-                        return resolve(nasaMedia);
-                      }
-                    },
-                  );
-                  break;
-                case 400:
-                  return reject(
-                    new APODServerError(
-                      `invalid request to NASA API: ${response.status} ${response.statusText}`,
-                    ),
-                  );
-                case 404:
-                  return reject(
-                    new APODServerError(
-                      `data not found in NASA API: ${response.status} ${response.statusText}`,
-                    ),
-                  );
-                default:
-                  return reject(
-                    new APODServerError(
-                      `failed to fetch data from NASA API: ${response.status} ${response.statusText}`,
-                    ),
-                  );
-              }
-            }
-          },
-        );
-      } else {
-        return reject(
-          new APODServerError('Database instance is not initialized.'),
-        );
-      }
+            case 404:
+              return reject(
+                HTTPNoDataFoundForDate(
+                  typeof date === 'string'
+                    ? date
+                    : date.toISOString().split('T')[0],
+                ),
+              );
+            default:
+              return reject(
+                HTTPInternalServerError({
+                  message: `Unexpected response.`,
+                  date: date,
+                }),
+              );
+          }
+        })
+        .catch(() => {
+          return reject(
+            HTTPInternalServerError({
+              message: `Unexpected error occurred.`,
+              date: date,
+            }),
+          );
+        });
     });
   }
 
@@ -138,94 +133,49 @@ export class APODServer {
     return new Promise<NasaMedia[] | undefined>((resolve, reject) => {
       const dates = getDateRange(offset, count);
 
-      if (dates.length === 0) {
-        return resolve([]);
-      }
+      if (dates.length === 0) return resolve([]);
 
-      const db = this.db?.getInstance();
+      const startDate = dates[dates.length - 1];
+      const endDate = dates[0];
 
-      if (db) {
-        const placeholders = dates.map(() => '?').join(',');
-        const sql = `SELECT * FROM apod WHERE id IN (${placeholders})`;
-        const params = dates;
+      axios
+        .get<NasaMedia[]>(NASA.API_URL, {
+          params: {
+            api_key: NASA.API_KEY,
+            start_date: startDate,
+            end_date: endDate,
+          },
+        })
+        .then((response) => {
+          const nasaMedia: NasaMedia[] | undefined = response.data as
+            NasaMedia[] | undefined;
 
-        db.all<APODModel>(sql, params, async (err, rows) => {
-          if (err) {
-            return reject(
-              new APODServerError('failed to query database apod: ', err),
-            );
+          switch (response.status) {
+            case 200:
+              return resolve(nasaMedia);
+            case 400:
+              return reject(
+                HTTPBadRequest({ message: `Invalid request.`, dates: dates }),
+              );
+            case 404:
+              return reject(HTTPNoDataFoundAtSpecifiedOffset(0, count));
+            default:
+              return reject(
+                HTTPInternalServerError({
+                  message: `Unexpected response.`,
+                  dates: dates,
+                }),
+              );
           }
-
-          const dbRows: NasaMedia[] = rows.map((row) => JSON.parse(row.object));
-
-          if (dbRows.length === dates.length) {
-            return resolve(dbRows);
-          } else {
-            const startDate = dates[dates.length - 1];
-            const endDate = dates[0];
-
-            const response = await axios.get<NasaMedia[]>(NASA.API_URL, {
-              params: {
-                api_key: NASA.API_KEY,
-                start_date: startDate,
-                end_date: endDate,
-              },
-            });
-
-            const nasaMedia: NasaMedia[] | undefined = response.data as
-              NasaMedia[] | undefined;
-            const placeholders = dates.map(() => '(?, ?, ?)').join(',');
-            const sql = `INSERT OR REPLACE INTO apod (id, type, object) VALUES ${placeholders}`;
-            const params =
-              nasaMedia
-                ?.map((item) => [
-                  item.date,
-                  item.media_type,
-                  JSON.stringify(item),
-                ])
-                .flat() ?? [];
-
-            switch (response.status) {
-              case 200:
-                db.run(sql, params, (err) => {
-                  if (err) {
-                    return reject(
-                      new APODServerError(
-                        'failed to insert data into database apod: ',
-                        err,
-                      ),
-                    );
-                  } else {
-                    return resolve(nasaMedia);
-                  }
-                });
-                break;
-              case 400:
-                return reject(
-                  new APODServerError(
-                    `invalid request to NASA API: ${response.status} ${response.statusText}`,
-                  ),
-                );
-              case 404:
-                return reject(
-                  new APODServerError(
-                    `data not found in NASA API: ${response.status} ${response.statusText}`,
-                  ),
-                );
-              default:
-                return reject(
-                  new APODServerError(
-                    `failed to fetch data from NASA API: ${response.status} ${response.statusText}`,
-                  ),
-                );
-            }
-          }
+        })
+        .catch(() => {
+          return reject(
+            HTTPInternalServerError({
+              message: `Unexpected error occurred.`,
+              dates: dates,
+            }),
+          );
         });
-      } else {
-        return reject(
-          new APODServerError('Database instance is not initialized.'),
-        );
-      }
     });
   }
 }

@@ -3,8 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ICON_LIST } from '@src/constants';
 import type { ImageProps } from 'next/image';
-import type{ IconName } from '@src/types/icon';
-
+import type { IconName } from '@src/types/icon';
 
 type IconProps = {
   name: IconName;
@@ -14,12 +13,19 @@ type IconProps = {
   loading?: ImageProps['loading'];
 };
 
+export function isIconName(name: string): name is IconName {
+  return ICON_LIST.includes(name) && typeof name === 'string';
+}
 
 function getSrc(name: IconName): string {
+  if (!isIconName(name)) throw new Error(`Invalid icon name: ${name}`);
+
   return `/icons/${name}.svg`;
 }
 
 function getAlt(name: IconName): string {
+  if (!isIconName(name)) throw new Error(`Invalid icon name: ${name}`);
+
   switch (name) {
     case 'docker':
       return 'Docker';
@@ -95,12 +101,16 @@ function getAlt(name: IconName): string {
       return 'SQL Developer';
     case 'xamarin':
       return 'Xamarin';
+    case 'firebase':
+      return 'Firebase';
     default:
       return '';
   }
 }
 
 function getLink(name: IconName): string {
+  if (!isIconName(name)) throw new Error(`Invalid icon name: ${name}`);
+
   switch (name) {
     case 'docker':
       return 'https://www.docker.com/';
@@ -176,13 +186,11 @@ function getLink(name: IconName): string {
       return 'https://www.oracle.com/database/technologies/appdev/sql-developer.html';
     case 'xamarin':
       return 'https://dotnet.microsoft.com/apps/xamarin';
+    case 'firebase':
+      return 'https://firebase.google.com';
     default:
       return '';
   }
-}
-
-export function isIconName(name: string): name is IconName {
-  return ICON_LIST.includes(name);
 }
 
 function Icon({
@@ -190,7 +198,7 @@ function Icon({
   containerClassName,
   imageContainerClassName,
   loading = 'lazy',
-  label = false
+  label = false,
 }: IconProps): JSX.Element {
   if (!isIconName(name)) throw new Error(`Invalid icon name: ${name}`);
 
@@ -198,14 +206,9 @@ function Icon({
     <Link href={getLink(name)} target="_blank" rel="noopener noreferrer">
       <div className={containerClassName}>
         <div className={imageContainerClassName}>
-          <Image
-            fill
-            loading={loading}
-            alt={getAlt(name)}
-            src={getSrc(name)}
-          />
+          <Image fill loading={loading} alt={getAlt(name)} src={getSrc(name)} />
         </div>
-      {label && <span className="icon-label">{getAlt(name)}</span>}
+        {label && <span className="icon-label">{getAlt(name)}</span>}
       </div>
     </Link>
   );

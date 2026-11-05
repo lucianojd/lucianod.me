@@ -3,7 +3,6 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { NasaMedia } from '@src/types/apod';
-import { useState } from 'react';
 import Link from 'next/link';
 
 interface ApodMediaListProps {
@@ -22,7 +21,10 @@ function ApodMediaList({ data, status }: ApodMediaListProps) {
         <ul className="apod-browser-list">
           {data.map((entry: NasaMedia) => (
             <li key={entry.date}>
-              <Link href={`/apod/${entry.date}`}>{entry.title}</Link>
+              <Link href={entry.url} target="_blank">
+                {entry.title}
+              </Link>
+              <span>{entry.date}</span>
             </li>
           ))}
         </ul>
@@ -32,23 +34,17 @@ function ApodMediaList({ data, status }: ApodMediaListProps) {
   }
 }
 
+//! Commented out pagination logic until NASA has re-implemented the ability to fetch multiple APOD entries at once. Until then, this component will only display the most recent APOD entry.
 export default function ApodBrowser() {
-  const [index, setIndex] = useState(0);
+  // const [index, setIndex] = useState(0);
 
-  const options = [5, 10, 20, 50];
-  const [count, setCount] = useState(options[0]);
+  // const options = [5, 10, 20, 50];
+  // const [count, setCount] = useState(options[0]);
 
   const { data, status } = useQuery<NasaMedia[]>({
-    queryKey: ['apod', index, count],
+    queryKey: ['apod'],
     queryFn: async () => {
-      const data = await axios
-        .get(`/api/apod`, {
-          params: {
-            offset: index,
-            count: count,
-          },
-        })
-        .then((res) => res.data);
+      const data = await axios.get(`/api/apod`).then((res) => res.data);
       return data;
     },
   });
@@ -57,7 +53,7 @@ export default function ApodBrowser() {
     <section className="apod-browser">
       <section className="apod-browser-header">
         <h1>Astronomy Picture of the Day Browser</h1>
-        <select
+        {/* <select
           defaultValue={count}
           onChange={(e) => setCount(Number(e.target.value))}
           id="apod-browser-count-select"
@@ -68,18 +64,18 @@ export default function ApodBrowser() {
               {option}
             </option>
           ))}
-        </select>
+        </select> */}
       </section>
       <section className="apod-browser-list">
         <ApodMediaList data={data || []} status={status} />
       </section>
-      <section className="apod-browser-pagination">
+      {/* <section className="apod-browser-pagination">
         <button disabled={index <= 0} onClick={() => setIndex(index - 1)}>
           Back
         </button>
         <label>{index + 1}</label>
         <button onClick={() => setIndex(index + 1)}>Next</button>
-      </section>
+      </section> */}
     </section>
   );
 }

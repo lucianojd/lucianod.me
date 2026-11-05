@@ -19,9 +19,16 @@ export function Project({ project }: ProjectProps) {
       </Link>
       <p>{project.subtitle}</p>
       <section className="icon-list">
-        {project.icons.sort((a, b) => a.localeCompare(b)).map((icon) => (
-          <Icon key={icon} containerClassName="icon-project" imageContainerClassName="container-project"  name={icon} />
-        ))}
+        {project.icons
+          .sort((a, b) => a.localeCompare(b))
+          .map((icon) => (
+            <Icon
+              key={icon}
+              containerClassName="icon-project"
+              imageContainerClassName="container-project"
+              name={icon}
+            />
+          ))}
       </section>
     </li>
   );

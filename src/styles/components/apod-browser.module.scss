@@ -33,6 +33,8 @@ section.apod-browser {
       flex-wrap: wrap;
 
       li {
+        display: flex;
+        flex-direction: column;
         background-color: vars.$clouds-dark;
         padding: 10px;
         border-radius: 5px;

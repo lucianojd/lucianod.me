@@ -8,26 +8,17 @@ export type MediaType = 'image' | 'video' | 'other';
 
 export interface NasaMedia {
   date: string;
-  explanation: string;
-  service_version: string;
+  post_id: number;
   title: string;
   media_type: 'image' | 'video' | 'other';
-}
-
-export interface NasaImage extends NasaMedia {
-  media_type: 'image';
+  explanation: string;
+  credit: string;
   copyright: string;
+  alt: string;
+  url: string;
   hdurl: string;
-  url: string;
-}
-
-export interface NasaVideo extends NasaMedia {
-  media_type: 'video';
-  url: string;
-}
-
-export interface NasaOther extends NasaMedia {
-  media_type: 'other';
+  basic_html: string;
+  basic_html_url: string;
 }
 
 export type ApodAPIResponse = {

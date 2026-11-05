@@ -15,15 +15,29 @@ export default async function Page() {
   const projects = await fetchProjects();
 
   return (
-    <section id="home-page" className='homePage'>
+    <section id="home-page" className="homePage">
       <h1>Welcome to the Home Page</h1>
       <p>
         To learn more about me, check out my <a href="/resume">resume</a>.
       </p>
+      <h1>On-site Projects</h1>
+      <ProjectList
+        projectList={[
+          {
+            name: 'APOD',
+            subtitle: 'Astronomy Picture of the Day',
+            description:
+              "A web application that displays the Astronomy Picture of the Day (APOD) from NASA's API. It allows users to view the APOD for a specific date and provides additional information about the image or video.",
+            repo: '/apod',
+            tags: ['React', 'Next.js', 'TypeScript'],
+            icons: ['reactjs', 'nextjs', 'typescript', 'firebase'],
+          },
+        ]}
+      />
       <h1>Projects</h1>
       <ProjectList projectList={projects} />
       <h1>Technologies</h1>
-      <Technologies/>
+      <Technologies />
     </section>
   );
 }

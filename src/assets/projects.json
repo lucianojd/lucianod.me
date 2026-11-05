@@ -3,12 +3,7 @@
     "name": "Team Based Care",
     "subtitle": "A web application for healthcare providers to manage their patients and care teams. Worked as a full stack developer.",
     "repo": "https://github.com/bcgov/MOH_TeamBasedCare",
-    "icons": [
-      "typescript",
-      "javascript",
-      "reactjs",
-      "nodejs"
-    ]
+    "icons": ["typescript", "javascript", "reactjs", "nodejs"]
   },
   {
     "name": "lucianod.me",

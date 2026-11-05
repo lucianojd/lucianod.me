@@ -1,37 +1,55 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { APODServerFactory } from '@src/apod';
+import { APODServerFactory, APODServerError } from '@src/apod';
+import { writeApod } from '@src/firebase';
+import { NasaMedia } from '@src/types/apod';
+import {
+  HTTPApodData,
+  HTTPCountExceedsLimit,
+  HTTPNoDataFoundAtSpecifiedOffset,
+} from '@src/utils/http/apod-responses';
+import { HTTPInternalServerError } from '@src/utils/http/error-responses';
+import { parseSearchParamInt } from '@src/utils/page-helpers';
+import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const offset = parseInt(searchParams.get('offset') || '0', 10);
-  const count = parseInt(searchParams.get('count') || '1', 10);
+  const offset = parseSearchParamInt(searchParams.get('offset'));
+  const count = parseSearchParamInt(searchParams.get('count'));
 
-  // Limit response to 10 results.
-  if (count > 1000) {
-    return NextResponse.json(
-      { message: 'Count cannot exceed 10' },
-      {
-        headers: { 'Content-Type': 'application/json' },
-        status: 400,
-      },
-    );
-  }
+  // Limit response to 100 results.
+  if (typeof count === 'number' && count > 100)
+    return HTTPCountExceedsLimit(count);
 
   try {
     const apodServer = await APODServerFactory.create();
-    const data = await apodServer.getAPODRange(offset, count);
 
-    return NextResponse.json(data, {
-      headers: { 'Content-Type': 'application/json' },
-      status: 200,
-    });
-  } catch (_) {
-    return NextResponse.json(
-      { message: 'Internal server error' },
-      {
-        headers: { 'Content-Type': 'application/json' },
-        status: 500,
-      },
+    let data: NasaMedia[] | undefined = [];
+
+    if (typeof offset === 'number' && typeof count === 'number') {
+      data = await apodServer.getAPODRange(offset, count);
+    } else {
+      data = await apodServer.getAPOD();
+    }
+
+    if (!data || data.length === 0)
+      return HTTPNoDataFoundAtSpecifiedOffset(offset, count);
+
+    await Promise.all(
+      data.map((entry) => {
+        return new Promise<void>((resolve) => {
+          writeApod(entry)
+            .then(() => resolve())
+            .catch(() => resolve());
+        });
+      }),
     );
+
+    return HTTPApodData(data);
+  } catch (error: unknown) {
+    if (error instanceof APODServerError) {
+      return error;
+    }
+    return HTTPInternalServerError({
+      message: 'An error occurred while fetching APOD data.',
+    });
   }
 }

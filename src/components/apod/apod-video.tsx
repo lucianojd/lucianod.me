@@ -1,8 +1,8 @@
-import { NasaVideo } from '@src/types/apod';
+import { NasaMedia } from '@src/types/apod';
 import Link from 'next/link';
 
 type ApodVideoProps = {
-  media: NasaVideo;
+  media: NasaMedia;
 };
 
 function ApodVideo({ media }: ApodVideoProps) {

@@ -1,12 +1,12 @@
 'use client';
 
-import { NasaImage } from '@src/types/apod';
+import { NasaMedia } from '@src/types/apod';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 type ApodImageProps = {
-  media: NasaImage;
+  media: NasaMedia;
 };
 
 const LocalDate = dynamic(() => import('@src/components/local-date'), {
