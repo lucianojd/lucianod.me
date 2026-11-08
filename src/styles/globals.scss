@@ -3,6 +3,7 @@
 @use '@src/styles/components/project.module.scss' as project;
 @use '@src/styles/components/apod.module.scss' as apod;
 @use '@src/styles/components/apod-browser.module.scss' as apod-browser;
+@use '@src/styles/components/blog.module.scss' as blog;
 
 $font-family:
   -apple-system,

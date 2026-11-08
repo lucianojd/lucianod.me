@@ -20,6 +20,9 @@ export default async function Page() {
       <p>
         To learn more about me, check out my <a href="/resume">resume</a>.
       </p>
+      <p>
+        Want to know more about my work? See my <a href="/blog">blog</a>.
+      </p>
       <h1>On-site Projects</h1>
       <ProjectList
         projectList={[
